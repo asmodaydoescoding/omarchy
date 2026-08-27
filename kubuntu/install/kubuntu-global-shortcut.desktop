@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Omarchy Default Agent
+Comment=Launch the configured Omarchy coding agent
+Exec=omarchy-agent --pick
+NoDisplay=true
+Terminal=false
+X-KDE-GlobalAccel-Shortcut=Meta+Shift+Ctrl+A

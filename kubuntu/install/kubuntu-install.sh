@@ -60,10 +60,18 @@ for source in "${link_sources[@]}"; do
   fi
 done
 
+desktop_source="$repo_root/kubuntu/install/kubuntu-global-shortcut.desktop"
+desktop_destination="$HOME/.local/share/applications/omarchy-agent.desktop"
+if [[ -e "$desktop_destination" ]] && ! cmp -s "$desktop_source" "$desktop_destination"; then
+  echo "Refusing to overwrite existing path: $desktop_destination" >&2
+  exit 1
+fi
+
 if [[ $mode == dry-run ]]; then
   printf 'dry-run: install %d user-local files under %s\n' "${#source_files[@]}" "$prefix"
   printf 'dry-run: create %d command links under %s\n' "${#link_sources[@]}" "$user_bin"
   printf 'dry-run: install skills into .agents, .claude, .codex, .pi, and .gemini\n'
+  printf 'dry-run: install KDE global shortcut under %s\n' "$desktop_destination"
   printf 'dry-run: install Hermes Harness and Omarchy Agents Plasma packages\n'
   printf 'dry-run: install user systemd units and usage timer\n'
   exit 0
@@ -78,6 +86,11 @@ for source in "${source_files[@]}"; do
   install -m "$(stat -c '%a' "$source")" "$source" "$destination"
   printf 'file\t%s\n' "$destination" >>"$manifest"
 done
+
+desktop_destination="$HOME/.local/share/applications/omarchy-agent.desktop"
+mkdir -p "$(dirname "$desktop_destination")"
+install -m 644 "$desktop_source" "$desktop_destination"
+printf 'file\t%s\n' "$desktop_destination" >>"$manifest"
 
 for source in "${link_sources[@]}"; do
   name=$(basename "$source")

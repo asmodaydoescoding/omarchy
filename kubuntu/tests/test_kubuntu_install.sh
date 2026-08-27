@@ -45,6 +45,8 @@ grep -Fq 'dry-run:' <<<"$output" || fail "installer dry-run did not report"
 [[ $(readlink -f "$HOME/.local/bin/omarchy-agent") == "$prefix/bin/omarchy-agent" ]] || fail "agent link points to wrong source"
 [[ $(readlink -f "$HOME/.local/bin/kubuntu-agent-terminal") == "$prefix/libexec/kubuntu-agent-terminal" ]] || fail "libexec link points to wrong source"
 [[ -L "$HOME/.agents/skills/omarchy" ]] || fail "installer did not install agent skills"
+[[ -f "$HOME/.local/share/applications/omarchy-agent.desktop" ]] || fail "installer did not install global shortcut"
+grep -Fq 'X-KDE-GlobalAccel-Shortcut=Meta+Shift+Ctrl+A' "$HOME/.local/share/applications/omarchy-agent.desktop" || fail "shortcut has wrong key"
 grep -Fq -- 'daemon-reload' "$log_file" || fail "installer did not reload user systemd"
 grep -Fq -- 'enable --now omarchy-agent-usage-update.timer' "$log_file" || fail "installer did not enable usage timer"
 
@@ -52,6 +54,7 @@ printf 'unrelated\n' >"$HOME/.local/bin/unrelated"
 "$uninstaller" --user
 [[ ! -e "$prefix" ]] || fail "uninstaller left the owned prefix"
 [[ ! -e "$HOME/.local/bin/omarchy-agent" ]] || fail "uninstaller left an owned link"
+[[ ! -e "$HOME/.local/share/applications/omarchy-agent.desktop" ]] || fail "uninstaller left the owned shortcut"
 [[ -f "$HOME/.local/bin/unrelated" ]] || fail "uninstaller removed unrelated user file"
 
 mkdir -p "$HOME/.local/bin"
