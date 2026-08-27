@@ -1,0 +1,20 @@
+#!/bin/bash
+set -Eeuo pipefail
+mode=${1:---dry-run}
+[[ $mode == "--dry-run" || $mode == "--apply" ]] || { echo "Usage: omarchy-voxtype-install [--dry-run|--apply]" >&2; exit 1; }
+url=${VOXTYPE_DEB_URL:-https://github.com/peteonrails/voxtype/releases/download/v0.7.1/voxtype_0.7.1-1_amd64.deb}
+backend="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../libexec" && pwd -P)/kubuntu-vendor-install"
+"$backend" "$mode" install-deb "$url" "${VOXTYPE_DEB_SHA256:-}"
+if [[ $mode == "--dry-run" ]]; then
+  printf 'dry-run: install wtype, wl-clipboard, libnotify-bin, playerctl, pipewire-alsa\n'
+  printf 'dry-run: create ~/.config/voxtype/config.toml and download base.en model\n'
+  printf 'dry-run: configure user voxtype.service and KDE shortcuts\n'
+  exit 0
+fi
+sudo apt install -y wtype wl-clipboard libnotify-bin playerctl pipewire-alsa
+mkdir -p "$HOME/.config/voxtype"
+cp "$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../voxtype" && pwd -P)/config.toml" "$HOME/.config/voxtype/config.toml"
+voxtype setup --download --no-post-install
+voxtype setup gpu --enable || true
+voxtype setup systemd
+printf 'Voxtype dictation installed. Configure KDE shortcuts for F9 and Super+Ctrl+X.\n'

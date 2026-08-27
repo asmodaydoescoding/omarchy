@@ -1,0 +1,14 @@
+#!/bin/bash
+set -Eeuo pipefail
+mode=${1:---dry-run}
+[[ $mode == "--dry-run" || $mode == "--apply" ]] || { echo "Usage: omarchy-voxtype-remove [--dry-run|--apply]" >&2; exit 1; }
+if [[ $mode == "--dry-run" ]]; then
+  printf 'dry-run: stop and remove user voxtype.service\n'
+  printf 'dry-run: sudo apt remove voxtype\n'
+  printf 'dry-run: remove ~/.config/voxtype and ~/.local/share/voxtype\n'
+  exit 0
+fi
+systemctl --user disable --now voxtype.service 2>/dev/null || true
+systemctl --user daemon-reload
+sudo apt remove voxtype
+rm -rf "$HOME/.config/voxtype" "$HOME/.local/share/voxtype"

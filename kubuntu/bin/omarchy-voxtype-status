@@ -1,0 +1,9 @@
+#!/bin/bash
+set -u
+
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+if ! command -v voxtype >/dev/null 2>&1; then
+  printf '{"alt":"","class":"idle","tooltip":""}\n'
+  exit 0
+fi
+exec setpriv --pdeathsig TERM voxtype status --follow --extended --format json

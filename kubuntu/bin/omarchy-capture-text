@@ -1,0 +1,4 @@
+#!/bin/bash
+set -Eeuo pipefail
+printf 'unsupported on Kubuntu Plasma: Omarchy OCR selection requires a Spectacle/KDE capture adapter\n' >&2
+exit 2
