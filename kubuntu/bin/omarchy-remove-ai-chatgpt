@@ -1,0 +1,11 @@
+#!/bin/bash
+set -Eeuo pipefail
+mode=${1:---dry-run}
+[[ $mode == "--dry-run" || $mode == "--apply" ]] || { echo "Usage: omarchy-remove-ai-chatgpt [--dry-run|--apply]" >&2; exit 1; }
+if [[ $mode == "--dry-run" ]]; then
+  printf 'dry-run: sudo apt remove openai-codex-desktop\n'
+  printf 'dry-run: remove ~/.config/Codex and ~/.cache/Codex\n'
+  exit 0
+fi
+sudo apt remove openai-codex-desktop
+rm -rf "$HOME/.config/Codex" "$HOME/.cache/Codex"

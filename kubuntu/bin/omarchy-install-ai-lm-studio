@@ -1,0 +1,6 @@
+#!/bin/bash
+set -Eeuo pipefail
+mode=${1:---dry-run}
+[[ $mode == "--dry-run" || $mode == "--apply" ]] || { echo "Usage: omarchy-install-ai-lm-studio [--dry-run|--apply]" >&2; exit 1; }
+url=${LM_STUDIO_APPIMAGE_URL:-https://lmstudio.ai/download/latest/linux/x64?format=AppImage}
+exec "$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../libexec" && pwd -P)/kubuntu-vendor-install" "$mode" install-appimage lmstudio "$url" "${LM_STUDIO_APPIMAGE_SHA256:-}"

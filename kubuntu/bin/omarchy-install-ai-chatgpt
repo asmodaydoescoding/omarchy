@@ -1,0 +1,6 @@
+#!/bin/bash
+set -Eeuo pipefail
+mode=${1:---dry-run}
+[[ $mode == "--dry-run" || $mode == "--apply" ]] || { echo "Usage: omarchy-install-ai-chatgpt [--dry-run|--apply]" >&2; exit 1; }
+url=${CHATGPT_DEB_URL:-https://persistent.oaistatic.com/codex-app-prod/linux/deb/latest/chatgpt_amd64.deb}
+exec "$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../libexec" && pwd -P)/kubuntu-vendor-install" "$mode" install-deb "$url" "${CHATGPT_DEB_SHA256:-}"

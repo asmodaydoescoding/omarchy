@@ -1,0 +1,14 @@
+#!/bin/bash
+set -Eeuo pipefail
+mode=${1:---dry-run}
+[[ $mode == "--dry-run" || $mode == "--apply" ]] || { echo "Usage: omarchy-install-ai-ollama [--dry-run|--apply]" >&2; exit 1; }
+if [[ $mode == "--dry-run" ]]; then
+  printf 'dry-run: download official Ollama installer from https://ollama.com/install.sh\n'
+  printf 'dry-run: execute installer with interactive sudo\n'
+  exit 0
+fi
+tmp_dir=$(mktemp -d)
+trap 'rm -rf "$tmp_dir"' EXIT
+curl --fail --location --proto '=https' --tlsv1.2 --silent --show-error --output "$tmp_dir/install.sh" https://ollama.com/install.sh
+bash -n "$tmp_dir/install.sh"
+sudo sh "$tmp_dir/install.sh"

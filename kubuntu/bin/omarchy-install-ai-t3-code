@@ -1,0 +1,6 @@
+#!/bin/bash
+set -Eeuo pipefail
+mode=${1:---dry-run}
+[[ $mode == "--dry-run" || $mode == "--apply" ]] || { echo "Usage: omarchy-install-ai-t3-code [--dry-run|--apply]" >&2; exit 1; }
+url=${T3CODE_APPIMAGE_URL:-https://github.com/pingdotgg/t3code/releases/latest}
+exec "$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../libexec" && pwd -P)/kubuntu-vendor-install" "$mode" install-appimage t3code "$url" "${T3CODE_APPIMAGE_SHA256:-}"

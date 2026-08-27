@@ -1,0 +1,13 @@
+#!/bin/bash
+set -Eeuo pipefail
+mode=${1:---dry-run}
+[[ $mode == "--dry-run" || $mode == "--apply" ]] || { echo "Usage: omarchy-remove-ai-lm-studio [--dry-run|--apply]" >&2; exit 1; }
+lmstudio_home=""
+if [[ -f "$HOME/.lmstudio-home-pointer" ]]; then read -r lmstudio_home <"$HOME/.lmstudio-home-pointer" || true; fi
+if [[ $mode == "--dry-run" ]]; then
+  printf 'dry-run: remove LM Studio package/application and configuration\n'
+  [[ -n "$lmstudio_home" ]] && printf 'dry-run: remove pointed model home %s\n' "$lmstudio_home"
+  exit 0
+fi
+rm -rf "$HOME/.config/LM Studio" "$HOME/.config/LM-Studio" "$HOME/.lmstudio" "$HOME/.lmstudio-home-pointer"
+if [[ -n "$lmstudio_home" && "$lmstudio_home" == /* && -d "$lmstudio_home" && "$lmstudio_home" != "/" && "$lmstudio_home" != "$HOME" ]]; then rm -rf -- "$lmstudio_home"; fi

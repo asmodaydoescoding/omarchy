@@ -1,0 +1,5 @@
+#!/bin/bash
+set -Eeuo pipefail
+mode=${1:---dry-run}
+[[ $mode == "--dry-run" || $mode == "--apply" ]] || { echo "Usage: omarchy-install-ai-grok-bot [--dry-run|--apply]" >&2; exit 1; }
+exec "$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../libexec" && pwd -P)/kubuntu-vendor-install" "$mode" gap grok-bot

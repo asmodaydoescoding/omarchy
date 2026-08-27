@@ -1,0 +1,106 @@
+#!/bin/bash
+set -Eeuo pipefail
+
+mode=apply
+if [[ ${1:-} == "--dry-run" ]]; then
+  mode=dry-run
+  shift
+elif [[ ${1:-} == "--apply" ]]; then
+  shift
+fi
+
+usage() {
+  echo "Usage: kubuntu-vendor-install [--dry-run|--apply] install-deb <official-url> [sha256]" >&2
+  echo "       kubuntu-vendor-install [--dry-run|--apply] install-appimage <name> <official-url> [sha256]" >&2
+  echo "       kubuntu-vendor-install [--dry-run|--apply] gap <feature>" >&2
+}
+
+official_url() {
+  case "$1" in
+    https://learn.chatgpt.com/*|https://persistent.oaistatic.com/*|https://lmstudio.ai/*|https://github.com/*|https://ollama.com/*|https://voxtype.io/*)
+      return 0
+      ;;
+    *)
+      echo "Refusing non-official vendor URL: $1" >&2
+      return 1
+      ;;
+  esac
+}
+
+verify_checksum() {
+  local file=$1 expected=$2 actual
+  [[ -z "$expected" ]] && return 0
+  [[ $expected =~ ^[0-9a-fA-F]{64}$ ]] || { echo "Invalid SHA-256" >&2; return 1; }
+  actual=$(sha256sum "$file" | cut -d' ' -f1)
+  [[ $actual == "$expected" ]] || { echo "SHA-256 mismatch for $file" >&2; return 1; }
+}
+
+download_artifact() {
+  local url=$1 file=$2
+  official_url "$url"
+  curl --fail --location --proto '=https' --tlsv1.2 --silent --show-error --output "$file" "$url"
+}
+
+install_deb() {
+  local url=$1 checksum=${2:-}
+  official_url "$url"
+  if [[ $mode == dry-run ]]; then
+    printf 'dry-run: download official deb %s\n' "$url"
+    printf 'dry-run: verify sha256 %s\n' "${checksum:-not-supplied}"
+    printf 'dry-run: sudo apt install downloaded deb\n'
+    return 0
+  fi
+
+  local temp_dir file
+  temp_dir=$(mktemp -d)
+  trap 'rm -rf "$temp_dir"' RETURN
+  file="$temp_dir/vendor.deb"
+  download_artifact "$url" "$file"
+  verify_checksum "$file" "$checksum"
+  sudo apt install "$file"
+}
+
+install_appimage() {
+  local name=$1 url=$2 checksum=${3:-}
+  [[ $name =~ ^[A-Za-z0-9._-]+$ ]] || { echo "Invalid AppImage name" >&2; return 1; }
+  official_url "$url"
+  local destination="$HOME/.local/share/omarchy-kubuntu-ai/apps/$name.AppImage"
+  if [[ $mode == dry-run ]]; then
+    printf 'dry-run: download official AppImage %s\n' "$url"
+    printf 'dry-run: verify sha256 %s\n' "${checksum:-not-supplied}"
+    printf 'dry-run: install user-local %s\n' "$destination"
+    return 0
+  fi
+
+  local temp_dir file
+  temp_dir=$(mktemp -d)
+  trap 'rm -rf "$temp_dir"' RETURN
+  file="$temp_dir/$name.AppImage"
+  download_artifact "$url" "$file"
+  verify_checksum "$file" "$checksum"
+  install -Dm755 "$file" "$destination"
+  printf '%s\n' "$destination"
+}
+
+gap() {
+  printf 'unsupported: %s has no verified official Kubuntu artifact\n' "$1"
+}
+
+case "${1:-}" in
+  install-deb)
+    (($# >= 2)) || { usage; exit 1; }
+    install_deb "$2" "${3:-}"
+    ;;
+  install-appimage)
+    (($# >= 3)) || { usage; exit 1; }
+    install_appimage "$2" "$3" "${4:-}"
+    ;;
+  gap)
+    (($# == 2)) || { usage; exit 1; }
+    gap "$2"
+    ;;
+  *)
+    usage
+    exit 1
+    ;;
+esac
