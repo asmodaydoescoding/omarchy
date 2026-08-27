@@ -42,6 +42,12 @@ report.
 omarchy capture text    # Select a region; extracted text goes to the clipboard
 ```
 
+**Kubuntu status:** this command currently returns exit status `2` with an explicit
+unsupported message. The pinned Omarchy path depends on Hyprland `slurp`/`grim`
+selection and there is no verified Spectacle/KDE OCR adapter in this port. Do not
+silently substitute a different capture flow; use Spectacle and an OCR tool
+manually until a KDE adapter is implemented and tested.
+
 ## Sharing Files
 
 ```bash

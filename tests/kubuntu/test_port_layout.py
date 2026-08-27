@@ -16,6 +16,7 @@ REQUIRED_DIRS = (
     "skills",
     "tests",
     "install",
+    "docs",
 )
 
 
@@ -31,18 +32,48 @@ class KubuntuPortLayoutTest(unittest.TestCase):
         self.assertEqual(manifest["schemaVersion"], 1)
         self.assertEqual(manifest["environmentVariable"], "OMARCHY_KUBUNTU_AI_ROOT")
         self.assertEqual(manifest["installPrefix"], "~/.local/share/omarchy-kubuntu-ai")
-        self.assertEqual(manifest["files"], [])
-        self.assertEqual(manifest["links"], [])
+        self.assertEqual(manifest["runtimeManifest"], "~/.local/share/omarchy-kubuntu-ai/install-manifest.tsv")
+        self.assertEqual(len(manifest["files"]), 72)
+        self.assertEqual(len(manifest["links"]), 42)
+        self.assertEqual(
+            manifest["configs"],
+            [{"path": "~/.config/kglobalshortcutsrc", "section": "[services][omarchy-agent.desktop]", "ownedKeys": ["_launch"]}],
+        )
         self.assertEqual(
             {entry["name"] for entry in manifest["sourceCheckouts"]},
             {"omarchy", "omarchy-hermes-harness"},
         )
+        self.assertEqual(
+            {entry["id"] for entry in manifest["packages"]},
+            {"com.asmoday.omarchy.hermes-harness", "com.asmoday.omarchy.agents"},
+        )
+
+        file_sources = {entry["source"] for entry in manifest["files"]}
+        expected_sources = set()
+        for root in ("ai-core", "bin", "libexec", "plasma", "skills", "systemd", "voxtype"):
+            for path in (KUBUNTU / root).rglob("*"):
+                if path.is_file() and path.name != ".gitkeep" and ".pyc" not in path.name and "__pycache__" not in path.parts:
+                    expected_sources.add("kubuntu/" + path.relative_to(KUBUNTU).as_posix())
+        expected_sources.add("kubuntu/install/kubuntu-global-shortcut.desktop")
+        expected_sources.add("kubuntu/install/kubuntu-global-shortcut-service.desktop")
+        self.assertTrue(expected_sources <= file_sources)
+        self.assertFalse(any(source.endswith(".pyc") or "__pycache__" in source for source in file_sources))
+        self.assertTrue(all((REPO / entry["source"]).is_file() for entry in manifest["files"] if entry["source"].startswith("kubuntu/")))
+
+        expected_links = {
+            "~/.local/bin/" + path.name
+            for root in (KUBUNTU / "bin", KUBUNTU / "libexec")
+            for path in root.iterdir()
+            if path.is_file() and path.name != ".gitkeep" and path.name != "kubuntu-global-shortcut"
+        }
+        self.assertEqual({entry["path"] for entry in manifest["links"]}, expected_links)
+        self.assertTrue(all(entry["target"].startswith("~/.local/share/omarchy-kubuntu-ai/") for entry in manifest["links"]))
 
         for directory in REQUIRED_DIRS:
             self.assertTrue((KUBUNTU / directory).is_dir(), directory)
 
         allowed_files = {"README.md", "port-manifest.json"}
-        allowed_roots = {"ai-core", "bin", "install", "libexec", "plasma", "skills", "systemd", "tests", "voxtype"}
+        allowed_roots = {"ai-core", "bin", "docs", "install", "libexec", "plasma", "skills", "systemd", "tests", "voxtype"}
         for path in KUBUNTU.rglob("*"):
             if path.is_file() and path.name != ".gitkeep":
                 relative = path.relative_to(KUBUNTU)

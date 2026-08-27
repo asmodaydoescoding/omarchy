@@ -16,7 +16,7 @@ The port preserves the source XDG namespaces for default-agent state, usage reco
 
 The installer writes only to user-local paths, Plasma's user plasmoid directory, and the user's systemd configuration. It does not write to `/usr`, `/etc`, `/usr/share/omarchy`, package-managed Omarchy files, or another Hermes profile. It does not read, copy, or print `.env` files, API keys, OAuth state, auth stores, SSH private keys, or other credentials.
 
-The port manifest records every file and link owned by the installer so uninstall can remove only port-owned state. Existing commands and configuration are never overwritten without an ownership match.
+The port manifest records every file and link owned by the installer so uninstall can remove only port-owned state. Existing commands and configuration are never overwritten without an ownership match. The KDE shortcut adapter installs a hidden application entry, a visible `kglobalaccel` service entry, and only its owned `[services][omarchy-agent.desktop]` stanza in `kglobalshortcutsrc`; unrelated shortcuts are preserved.
 
 ## Layout
 

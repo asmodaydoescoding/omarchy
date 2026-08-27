@@ -3,6 +3,7 @@
   "project": "omarchy-kubuntu-ai",
   "environmentVariable": "OMARCHY_KUBUNTU_AI_ROOT",
   "installPrefix": "~/.local/share/omarchy-kubuntu-ai",
+  "runtimeManifest": "~/.local/share/omarchy-kubuntu-ai/install-manifest.tsv",
   "sourceCheckouts": [
     {
       "name": "omarchy",
@@ -17,6 +18,485 @@
       "sourceCommit": "2d7268800ee36eb36ba837c9755ebb3536f73d62"
     }
   ],
-  "files": [],
-  "links": []
+  "files": [
+    {
+      "source": "kubuntu/ai-core/hermes-safe-io",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/ai-core/hermes-safe-io"
+    },
+    {
+      "source": "kubuntu/ai-core/hermes-status",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/ai-core/hermes-status"
+    },
+    {
+      "source": "kubuntu/ai-core/omarchy-mise-install",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/ai-core/omarchy-mise-install"
+    },
+    {
+      "source": "kubuntu/bin/hermes-status",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/hermes-status"
+    },
+    {
+      "source": "kubuntu/bin/omarchy",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-agent",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-agent"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-agent-crash",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-agent-crash"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-agent-prompt",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-agent-prompt"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-agent-usage-claude",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-agent-usage-claude"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-agent-usage-codex",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-agent-usage-codex"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-agent-usage-fireworks",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-agent-usage-fireworks"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-agent-usage-list",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-agent-usage-list"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-agent-usage-update",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-agent-usage-update"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-capture-text",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-capture-text"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-crash-mute",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-crash-mute"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-crash-watch",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-crash-watch"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-default-agent",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-default-agent"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-install-agent-skills",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-install-agent-skills"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-install-ai-chatgpt",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-install-ai-chatgpt"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-install-ai-grok-bot",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-install-ai-grok-bot"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-install-ai-lm-studio",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-install-ai-lm-studio"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-install-ai-ollama",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-install-ai-ollama"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-install-ai-t3-code",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-install-ai-t3-code"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-notification-send",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-notification-send"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-notification-wait",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-notification-wait"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-remove-ai-chatgpt",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-remove-ai-chatgpt"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-remove-ai-grok-bot",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-remove-ai-grok-bot"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-remove-ai-lm-studio",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-remove-ai-lm-studio"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-remove-ai-ollama",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-remove-ai-ollama"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-remove-ai-t3-code",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-remove-ai-t3-code"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-theme-refresh",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-theme-refresh"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-theme-set-claude",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-theme-set-claude"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-theme-set-opencode",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-theme-set-opencode"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-theme-set-pi",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-theme-set-pi"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-toggle",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-toggle"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-toggle-crash-capture",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-toggle-crash-capture"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-toggle-enabled",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-toggle-enabled"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-voxtype-config",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-voxtype-config"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-voxtype-install",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-voxtype-install"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-voxtype-model",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-voxtype-model"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-voxtype-remove",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-voxtype-remove"
+    },
+    {
+      "source": "kubuntu/bin/omarchy-voxtype-status",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-voxtype-status"
+    },
+    {
+      "source": "kubuntu/libexec/kubuntu-agent-picker",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/libexec/kubuntu-agent-picker"
+    },
+    {
+      "source": "kubuntu/libexec/kubuntu-agent-terminal",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/libexec/kubuntu-agent-terminal"
+    },
+    {
+      "source": "kubuntu/libexec/kubuntu-global-shortcut",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/libexec/kubuntu-global-shortcut"
+    },
+    {
+      "source": "kubuntu/libexec/kubuntu-vendor-install",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/libexec/kubuntu-vendor-install"
+    },
+    {
+      "source": "kubuntu/skills/diagnose-crash/SKILL.md",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/skills/diagnose-crash/SKILL.md"
+    },
+    {
+      "source": "kubuntu/skills/diagnose-crash/reporting.md",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/skills/diagnose-crash/reporting.md"
+    },
+    {
+      "source": "kubuntu/skills/omarchy/SKILL.md",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/skills/omarchy/SKILL.md"
+    },
+    {
+      "source": "kubuntu/skills/omarchy/capture.md",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/skills/omarchy/capture.md"
+    },
+    {
+      "source": "kubuntu/skills/omarchy/contributing.md",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/skills/omarchy/contributing.md"
+    },
+    {
+      "source": "kubuntu/skills/omarchy/hooks.md",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/skills/omarchy/hooks.md"
+    },
+    {
+      "source": "kubuntu/skills/omarchy/hyprland.md",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/skills/omarchy/hyprland.md"
+    },
+    {
+      "source": "kubuntu/skills/omarchy/plugins.md",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/skills/omarchy/plugins.md"
+    },
+    {
+      "source": "kubuntu/skills/omarchy/theming.md",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/skills/omarchy/theming.md"
+    },
+    {
+      "source": "kubuntu/voxtype/config.toml",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/voxtype/config.toml"
+    },
+    {
+      "source": "kubuntu/systemd/user/omarchy-agent-usage-update.service",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/systemd/user/omarchy-agent-usage-update.service"
+    },
+    {
+      "source": "kubuntu/systemd/user/omarchy-agent-usage-update.timer",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/systemd/user/omarchy-agent-usage-update.timer"
+    },
+    {
+      "source": "kubuntu/systemd/user/omarchy-crash-watch.service",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/systemd/user/omarchy-crash-watch.service"
+    },
+    {
+      "source": "kubuntu/plasma/hermes-harness/package/contents/config/config.qml",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/plasma/hermes-harness/package/contents/config/config.qml"
+    },
+    {
+      "source": "kubuntu/plasma/hermes-harness/package/contents/config/main.xml",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/plasma/hermes-harness/package/contents/config/main.xml"
+    },
+    {
+      "source": "kubuntu/plasma/hermes-harness/package/contents/ui/main.qml",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/plasma/hermes-harness/package/contents/ui/main.qml"
+    },
+    {
+      "source": "kubuntu/plasma/hermes-harness/package/metadata.json",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/plasma/hermes-harness/package/metadata.json"
+    },
+    {
+      "source": "kubuntu/plasma/omarchy-agents/package/contents/config/config.qml",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/plasma/omarchy-agents/package/contents/config/config.qml"
+    },
+    {
+      "source": "kubuntu/plasma/omarchy-agents/package/contents/config/main.xml",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/plasma/omarchy-agents/package/contents/config/main.xml"
+    },
+    {
+      "source": "kubuntu/plasma/omarchy-agents/package/contents/ui/main.qml",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/plasma/omarchy-agents/package/contents/ui/main.qml"
+    },
+    {
+      "source": "kubuntu/plasma/omarchy-agents/package/metadata.json",
+      "destination": "~/.local/share/omarchy-kubuntu-ai/plasma/omarchy-agents/package/metadata.json"
+    },
+    {
+      "source": "kubuntu/systemd/user/omarchy-agent-usage-update.service",
+      "destination": "~/.config/systemd/user/omarchy-agent-usage-update.service"
+    },
+    {
+      "source": "kubuntu/systemd/user/omarchy-agent-usage-update.timer",
+      "destination": "~/.config/systemd/user/omarchy-agent-usage-update.timer"
+    },
+    {
+      "source": "kubuntu/systemd/user/omarchy-crash-watch.service",
+      "destination": "~/.config/systemd/user/omarchy-crash-watch.service"
+    },
+    {
+      "source": "kubuntu/install/kubuntu-global-shortcut.desktop",
+      "destination": "~/.local/share/applications/omarchy-agent.desktop"
+    },
+    {
+      "source": "kubuntu/install/kubuntu-global-shortcut-service.desktop",
+      "destination": "~/.local/share/kglobalaccel/omarchy-agent.desktop"
+    }
+  ],
+  "links": [
+    {
+      "path": "~/.local/bin/hermes-status",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/hermes-status"
+    },
+    {
+      "path": "~/.local/bin/omarchy",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy"
+    },
+    {
+      "path": "~/.local/bin/omarchy-agent",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-agent"
+    },
+    {
+      "path": "~/.local/bin/omarchy-agent-crash",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-agent-crash"
+    },
+    {
+      "path": "~/.local/bin/omarchy-agent-prompt",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-agent-prompt"
+    },
+    {
+      "path": "~/.local/bin/omarchy-agent-usage-claude",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-agent-usage-claude"
+    },
+    {
+      "path": "~/.local/bin/omarchy-agent-usage-codex",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-agent-usage-codex"
+    },
+    {
+      "path": "~/.local/bin/omarchy-agent-usage-fireworks",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-agent-usage-fireworks"
+    },
+    {
+      "path": "~/.local/bin/omarchy-agent-usage-list",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-agent-usage-list"
+    },
+    {
+      "path": "~/.local/bin/omarchy-agent-usage-update",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-agent-usage-update"
+    },
+    {
+      "path": "~/.local/bin/omarchy-capture-text",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-capture-text"
+    },
+    {
+      "path": "~/.local/bin/omarchy-crash-mute",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-crash-mute"
+    },
+    {
+      "path": "~/.local/bin/omarchy-crash-watch",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-crash-watch"
+    },
+    {
+      "path": "~/.local/bin/omarchy-default-agent",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-default-agent"
+    },
+    {
+      "path": "~/.local/bin/omarchy-install-agent-skills",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-install-agent-skills"
+    },
+    {
+      "path": "~/.local/bin/omarchy-install-ai-chatgpt",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-install-ai-chatgpt"
+    },
+    {
+      "path": "~/.local/bin/omarchy-install-ai-grok-bot",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-install-ai-grok-bot"
+    },
+    {
+      "path": "~/.local/bin/omarchy-install-ai-lm-studio",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-install-ai-lm-studio"
+    },
+    {
+      "path": "~/.local/bin/omarchy-install-ai-ollama",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-install-ai-ollama"
+    },
+    {
+      "path": "~/.local/bin/omarchy-install-ai-t3-code",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-install-ai-t3-code"
+    },
+    {
+      "path": "~/.local/bin/omarchy-notification-send",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-notification-send"
+    },
+    {
+      "path": "~/.local/bin/omarchy-notification-wait",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-notification-wait"
+    },
+    {
+      "path": "~/.local/bin/omarchy-remove-ai-chatgpt",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-remove-ai-chatgpt"
+    },
+    {
+      "path": "~/.local/bin/omarchy-remove-ai-grok-bot",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-remove-ai-grok-bot"
+    },
+    {
+      "path": "~/.local/bin/omarchy-remove-ai-lm-studio",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-remove-ai-lm-studio"
+    },
+    {
+      "path": "~/.local/bin/omarchy-remove-ai-ollama",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-remove-ai-ollama"
+    },
+    {
+      "path": "~/.local/bin/omarchy-remove-ai-t3-code",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-remove-ai-t3-code"
+    },
+    {
+      "path": "~/.local/bin/omarchy-theme-refresh",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-theme-refresh"
+    },
+    {
+      "path": "~/.local/bin/omarchy-theme-set-claude",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-theme-set-claude"
+    },
+    {
+      "path": "~/.local/bin/omarchy-theme-set-opencode",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-theme-set-opencode"
+    },
+    {
+      "path": "~/.local/bin/omarchy-theme-set-pi",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-theme-set-pi"
+    },
+    {
+      "path": "~/.local/bin/omarchy-toggle",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-toggle"
+    },
+    {
+      "path": "~/.local/bin/omarchy-toggle-crash-capture",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-toggle-crash-capture"
+    },
+    {
+      "path": "~/.local/bin/omarchy-toggle-enabled",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-toggle-enabled"
+    },
+    {
+      "path": "~/.local/bin/omarchy-voxtype-config",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-voxtype-config"
+    },
+    {
+      "path": "~/.local/bin/omarchy-voxtype-install",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-voxtype-install"
+    },
+    {
+      "path": "~/.local/bin/omarchy-voxtype-model",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-voxtype-model"
+    },
+    {
+      "path": "~/.local/bin/omarchy-voxtype-remove",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-voxtype-remove"
+    },
+    {
+      "path": "~/.local/bin/omarchy-voxtype-status",
+      "target": "~/.local/share/omarchy-kubuntu-ai/bin/omarchy-voxtype-status"
+    },
+    {
+      "path": "~/.local/bin/kubuntu-agent-picker",
+      "target": "~/.local/share/omarchy-kubuntu-ai/libexec/kubuntu-agent-picker"
+    },
+    {
+      "path": "~/.local/bin/kubuntu-agent-terminal",
+      "target": "~/.local/share/omarchy-kubuntu-ai/libexec/kubuntu-agent-terminal"
+    },
+    {
+      "path": "~/.local/bin/kubuntu-vendor-install",
+      "target": "~/.local/share/omarchy-kubuntu-ai/libexec/kubuntu-vendor-install"
+    }
+  ],
+  "configs": [
+    {
+      "path": "~/.config/kglobalshortcutsrc",
+      "section": "[services][omarchy-agent.desktop]",
+      "ownedKeys": [
+        "_launch"
+      ]
+    }
+  ],
+  "packages": [
+    {
+      "type": "Plasma/Applet",
+      "id": "com.asmoday.omarchy.hermes-harness",
+      "source": "kubuntu/plasma/hermes-harness/package"
+    },
+    {
+      "type": "Plasma/Applet",
+      "id": "com.asmoday.omarchy.agents",
+      "source": "kubuntu/plasma/omarchy-agents/package"
+    }
+  ]
 }
