@@ -1,0 +1,51 @@
+#!/bin/bash
+set -Eeuo pipefail
+
+if (($# < 1)); then
+  echo "Usage: omarchy-toggle <flag-name> [toggle|on|off]" >&2
+  exit 1
+fi
+
+FLAG_NAME="$1"
+ACTION="${2:-toggle}"
+if [[ ! $FLAG_NAME =~ ^([A-Za-z0-9._-]+/)*[A-Za-z0-9._-]+$ ]]; then
+  echo "Invalid toggle name: $FLAG_NAME" >&2
+  exit 1
+fi
+IFS=/ read -ra flag_parts <<<"$FLAG_NAME"
+for flag_part in "${flag_parts[@]}"; do
+  if [[ $flag_part == "." || $flag_part == ".." ]]; then
+    echo "Invalid toggle name: $FLAG_NAME" >&2
+    exit 1
+  fi
+done
+FLAG="$HOME/.local/state/omarchy/toggles/$FLAG_NAME"
+
+enable() {
+  mkdir -p "$(dirname "$FLAG")"
+  touch "$FLAG"
+}
+
+disable() {
+  rm -f "$FLAG"
+}
+
+case "$ACTION" in
+  toggle|"")
+    if [[ -f $FLAG ]]; then
+      disable
+    else
+      enable
+    fi
+    ;;
+  on)
+    enable
+    ;;
+  off)
+    disable
+    ;;
+  *)
+    echo "Usage: omarchy-toggle <flag-name> [toggle|on|off]" >&2
+    exit 1
+    ;;
+esac

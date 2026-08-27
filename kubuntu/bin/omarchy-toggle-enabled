@@ -1,0 +1,10 @@
+#!/bin/bash
+set -Eeuo pipefail
+
+FLAG_NAME=${1:-}
+[[ $FLAG_NAME =~ ^([A-Za-z0-9._-]+/)*[A-Za-z0-9._-]+$ ]] || exit 1
+IFS=/ read -ra flag_parts <<<"$FLAG_NAME"
+for flag_part in "${flag_parts[@]}"; do
+  [[ $flag_part == "." || $flag_part == ".." ]] && exit 1
+done
+[[ -f "$HOME/.local/state/omarchy/toggles/$FLAG_NAME" ]]
