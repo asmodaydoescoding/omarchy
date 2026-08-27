@@ -47,6 +47,8 @@ grep -Fq 'dry-run:' <<<"$output" || fail "installer dry-run did not report"
 [[ -L "$HOME/.agents/skills/omarchy" ]] || fail "installer did not install agent skills"
 [[ -f "$HOME/.local/share/applications/omarchy-agent.desktop" ]] || fail "installer did not install global shortcut"
 grep -Fq 'X-KDE-GlobalAccel-Shortcut=Meta+Shift+Ctrl+A' "$HOME/.local/share/applications/omarchy-agent.desktop" || fail "shortcut has wrong key"
+[[ -f "$HOME/.config/systemd/user/omarchy-crash-watch.service" ]] || fail "installer did not install crash watcher unit"
+[[ -f "$HOME/.config/systemd/user/omarchy-agent-usage-update.timer" ]] || fail "installer did not install usage timer unit"
 grep -Fq -- 'daemon-reload' "$log_file" || fail "installer did not reload user systemd"
 grep -Fq -- 'enable --now omarchy-agent-usage-update.timer' "$log_file" || fail "installer did not enable usage timer"
 

@@ -24,8 +24,16 @@ grep -Fq 'Qt.Key_L' "$main" || fail "right keyboard provider navigation is missi
 grep -Fq 'TOKENS BY DAY' "$main" || fail "daily token section is missing"
 grep -Fq 'TOKENS BY MODEL' "$main" || fail "model token section is missing"
 
-kpackagetool6 --type Plasma/Applet --install "$package" >/dev/null
-trap 'kpackagetool6 --type Plasma/Applet --remove com.asmoday.omarchy.agents >/dev/null 2>&1 || true' EXIT
+preexisting=0
+if kpackagetool6 --type Plasma/Applet --show com.asmoday.omarchy.agents >/dev/null 2>&1; then
+  preexisting=1
+  kpackagetool6 --type Plasma/Applet --upgrade "$package" >/dev/null
+else
+  kpackagetool6 --type Plasma/Applet --install "$package" >/dev/null
+fi
+if ((preexisting == 0)); then
+  trap 'kpackagetool6 --type Plasma/Applet --remove com.asmoday.omarchy.agents >/dev/null 2>&1 || true' EXIT
+fi
 kpackagetool6 --type Plasma/Applet --show com.asmoday.omarchy.agents >/dev/null || fail "Agents package was not installed"
 
 printf 'ok - Omarchy Agents Plasma package metadata, bridge, interactions, and install are verified\n'

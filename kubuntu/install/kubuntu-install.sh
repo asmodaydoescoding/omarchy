@@ -21,7 +21,7 @@ while IFS= read -r path; do source_files+=("$path"); done < <(
 from pathlib import Path
 import sys
 root=Path(sys.argv[1])
-for rel_root in ('bin','libexec','skills','voxtype','systemd','plasma'):
+for rel_root in ('ai-core','bin','libexec','skills','voxtype','systemd','plasma'):
     base=root/rel_root
     if not base.exists():
         continue
@@ -87,6 +87,16 @@ for source in "${source_files[@]}"; do
   printf 'file\t%s\n' "$destination" >>"$manifest"
 done
 
+user_unit_dir="$HOME/.config/systemd/user"
+for unit_source in "$repo_root"/kubuntu/systemd/user/*; do
+  [[ -f "$unit_source" ]] || continue
+  unit_name=$(basename "$unit_source")
+  unit_destination="$user_unit_dir/$unit_name"
+  mkdir -p "$user_unit_dir"
+  install -m 644 "$unit_source" "$unit_destination"
+  printf 'file\t%s\n' "$unit_destination" >>"$manifest"
+done
+
 desktop_destination="$HOME/.local/share/applications/omarchy-agent.desktop"
 mkdir -p "$(dirname "$desktop_destination")"
 install -m 644 "$desktop_source" "$desktop_destination"
@@ -104,8 +114,17 @@ done
 KUBUNTU_SKILLS_ROOT="$prefix/skills" "$prefix/bin/omarchy-install-agent-skills"
 
 for package in hermes-harness omarchy-agents; do
-  package_id="com.asmoday.omarchy.$package"
-  kpackagetool6 --type Plasma/Applet --install "$prefix/plasma/$package/package" >/dev/null
+  if [[ "$package" == "omarchy-agents" ]]; then
+    package_id="com.asmoday.omarchy.agents"
+  else
+    package_id="com.asmoday.omarchy.hermes-harness"
+  fi
+  package_path="$prefix/plasma/$package/package"
+  if kpackagetool6 --type Plasma/Applet --show "$package_id" >/dev/null 2>&1; then
+    kpackagetool6 --type Plasma/Applet --upgrade "$package_path" >/dev/null
+  else
+    kpackagetool6 --type Plasma/Applet --install "$package_path" >/dev/null
+  fi
   printf 'package\t%s\n' "$package_id" >>"$manifest"
 done
 

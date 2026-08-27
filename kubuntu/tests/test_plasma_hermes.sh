@@ -19,8 +19,16 @@ grep -Fq 'Qt.RightButton' "$main" || fail "right-click launch is missing"
 grep -Fq 'Qt.MiddleButton' "$main" || fail "middle-click refresh is missing"
 grep -Fq 'plasmoid.expanded = true' "$main" || fail "left-click panel behavior is missing"
 
-kpackagetool6 --type Plasma/Applet --install "$package" >/dev/null
-trap 'kpackagetool6 --type Plasma/Applet --remove com.asmoday.omarchy.hermes-harness >/dev/null 2>&1 || true' EXIT
+preexisting=0
+if kpackagetool6 --type Plasma/Applet --show com.asmoday.omarchy.hermes-harness >/dev/null 2>&1; then
+  preexisting=1
+  kpackagetool6 --type Plasma/Applet --upgrade "$package" >/dev/null
+else
+  kpackagetool6 --type Plasma/Applet --install "$package" >/dev/null
+fi
+if ((preexisting == 0)); then
+  trap 'kpackagetool6 --type Plasma/Applet --remove com.asmoday.omarchy.hermes-harness >/dev/null 2>&1 || true' EXIT
+fi
 kpackagetool6 --type Plasma/Applet --show com.asmoday.omarchy.hermes-harness >/dev/null || fail "Plasma package was not installed"
 
 printf 'ok - Hermes Harness Plasma package metadata, bridge, interactions, and install are verified\n'

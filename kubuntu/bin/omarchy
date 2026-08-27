@@ -1,0 +1,98 @@
+#!/bin/bash
+set -Eeuo pipefail
+
+usage() {
+  cat >&2 <<'USAGE'
+Usage: omarchy agent [prompt|usage-update|crash] [args...]
+       omarchy default agent [args...]
+       omarchy crash mute [args...]
+       omarchy toggle crash-capture
+       omarchy notification send [args...]
+       omarchy install ai <chatgpt|grok-bot|lm-studio|ollama|t3-code> [--dry-run|--apply]
+       omarchy remove ai <chatgpt|grok-bot|lm-studio|ollama|t3-code> [--dry-run|--apply]
+       omarchy voxtype <install|remove|model|config|status>
+USAGE
+}
+
+case "${1:-}" in
+  agent)
+    shift
+    case "${1:-}" in
+      prompt)
+        shift
+        exec omarchy-agent-prompt "$@"
+        ;;
+      usage-update)
+        shift
+        exec omarchy-agent-usage-update "$@"
+        ;;
+      crash)
+        shift
+        exec omarchy-agent-crash "$@"
+        ;;
+      *)
+        exec omarchy-agent "$@"
+        ;;
+    esac
+    ;;
+  default)
+    [[ ${2:-} == agent ]] || { usage; exit 1; }
+    shift 2
+    exec omarchy-default-agent "$@"
+    ;;
+  crash)
+    [[ ${2:-} == mute ]] || { usage; exit 1; }
+    shift 2
+    exec omarchy-crash-mute "$@"
+    ;;
+  toggle)
+    [[ ${2:-} == crash-capture ]] || { usage; exit 1; }
+    shift 2
+    (($# == 0)) || { usage; exit 1; }
+    exec omarchy-toggle-crash-capture
+    ;;
+  notification)
+    [[ ${2:-} == send ]] || { usage; exit 1; }
+    shift 2
+    exec omarchy-notification-send "$@"
+    ;;
+  install|remove)
+    operation=$1
+    [[ ${2:-} == ai ]] || { usage; exit 1; }
+    feature=${3:-}
+    shift 3
+    case "$operation:$feature" in
+      install:chatgpt) command=omarchy-install-ai-chatgpt ;;
+      install:grok-bot) command=omarchy-install-ai-grok-bot ;;
+      install:lm-studio) command=omarchy-install-ai-lm-studio ;;
+      install:ollama) command=omarchy-install-ai-ollama ;;
+      install:t3-code) command=omarchy-install-ai-t3-code ;;
+      remove:chatgpt) command=omarchy-remove-ai-chatgpt ;;
+      remove:grok-bot) command=omarchy-remove-ai-grok-bot ;;
+      remove:lm-studio) command=omarchy-remove-ai-lm-studio ;;
+      remove:ollama) command=omarchy-remove-ai-ollama ;;
+      remove:t3-code) command=omarchy-remove-ai-t3-code ;;
+      *) usage; exit 1 ;;
+    esac
+    exec "$command" "$@"
+    ;;
+  voxtype)
+    action=${2:-status}
+    shift 2
+    case "$action" in
+      install) exec omarchy-voxtype-install "$@" ;;
+      remove) exec omarchy-voxtype-remove "$@" ;;
+      model) exec omarchy-voxtype-model "$@" ;;
+      config) exec omarchy-voxtype-config "$@" ;;
+      status) exec omarchy-voxtype-status "$@" ;;
+      *) usage; exit 1 ;;
+    esac
+    ;;
+  --help|-h|"")
+    usage
+    ;;
+  *)
+    usage
+    exit 1
+    ;;
+esac
