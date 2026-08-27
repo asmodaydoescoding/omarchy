@@ -30,6 +30,8 @@ export XDG_DATA_HOME="$test_home/.local/share"
 export SYSTEM_LOG="$log_file"
 export PATH="$fake_bin:/usr/bin:/bin"
 export KUBUNTU_INSTALL_PREFIX="$prefix"
+mkdir -p "$test_home/.config"
+printf '%s\n' '[unrelated]' 'foo=bar' '[omarchy-agent.desktop]' '_k_friendly_name=Omarchy Default Agent' '_launch=Meta+Shift+Ctrl+A,none,omarchy-agent --pick' >"$test_home/.config/kglobalshortcutsrc"
 
 bash -n "$installer" "$uninstaller"
 
@@ -50,23 +52,47 @@ fi
 [[ -L "$HOME/.agents/skills/omarchy" ]] || fail "installer did not install agent skills"
 [[ -f "$HOME/.local/share/applications/omarchy-agent.desktop" ]] || fail "installer did not install global shortcut"
 grep -Fq 'X-KDE-GlobalAccel-Shortcut=Meta+Shift+Ctrl+A' "$HOME/.local/share/applications/omarchy-agent.desktop" || fail "shortcut has wrong key"
+grep -Fq 'X-KDE-GlobalAccel-CommandShortcut=true' "$HOME/.local/share/applications/omarchy-agent.desktop" || fail "shortcut is not marked as a command"
+grep -Fqx '[services][omarchy-agent.desktop]' "$HOME/.config/kglobalshortcutsrc" || fail "shortcut was not registered with KDE 6"
+grep -Fqx '_launch=Meta+Shift+Ctrl+A' "$HOME/.config/kglobalshortcutsrc" || fail "shortcut registration has wrong launch vector"
+if grep -Fqx '[omarchy-agent.desktop]' "$HOME/.config/kglobalshortcutsrc"; then
+  fail "legacy shortcut stanza was not migrated"
+fi
+grep -Fqx '[unrelated]' "$HOME/.config/kglobalshortcutsrc" || fail "installer changed unrelated shortcut stanza"
+[[ -f "$HOME/.local/share/kglobalaccel/omarchy-agent.desktop" ]] || fail "installer did not install KDE 6 shortcut service"
+grep -Fqx 'Exec=omarchy-agent --pick' "$HOME/.local/share/kglobalaccel/omarchy-agent.desktop" || fail "KDE shortcut service has wrong launch vector"
+grep -Fqx 'X-KDE-Shortcuts=Meta+Shift+Ctrl+A' "$HOME/.local/share/kglobalaccel/omarchy-agent.desktop" || fail "KDE shortcut service has no Plasma 6 shortcut key"
+if grep -Fqx 'NoDisplay=true' "$HOME/.local/share/kglobalaccel/omarchy-agent.desktop"; then
+  fail "KDE shortcut service is hidden from kglobalacceld"
+fi
 [[ -f "$HOME/.config/systemd/user/omarchy-crash-watch.service" ]] || fail "installer did not install crash watcher unit"
 [[ -f "$HOME/.config/systemd/user/omarchy-agent-usage-update.timer" ]] || fail "installer did not install usage timer unit"
 grep -Fq -- 'daemon-reload' "$log_file" || fail "installer did not reload user systemd"
 grep -Fq -- 'enable --now omarchy-agent-usage-update.timer' "$log_file" || fail "installer did not enable usage timer"
+
+printf 'old owned version\n' >"$HOME/.local/share/applications/omarchy-agent.desktop"
+"$installer" --user
+cmp -s "$repo_root/kubuntu/install/kubuntu-global-shortcut.desktop" "$HOME/.local/share/applications/omarchy-agent.desktop" || fail "installer did not upgrade an owned shortcut"
 
 printf 'unrelated\n' >"$HOME/.local/bin/unrelated"
 "$uninstaller" --user
 [[ ! -e "$prefix" ]] || fail "uninstaller left the owned prefix"
 [[ ! -e "$HOME/.local/bin/omarchy-agent" ]] || fail "uninstaller left an owned link"
 [[ ! -e "$HOME/.local/share/applications/omarchy-agent.desktop" ]] || fail "uninstaller left the owned shortcut"
+grep -Fqx '[unrelated]' "$HOME/.config/kglobalshortcutsrc" || fail "uninstaller removed unrelated shortcut stanza"
+if grep -Fqx '[services][omarchy-agent.desktop]' "$HOME/.config/kglobalshortcutsrc"; then
+  fail "uninstaller left the owned shortcut stanza"
+fi
+[[ ! -e "$HOME/.local/share/kglobalaccel/omarchy-agent.desktop" ]] || fail "uninstaller left the KDE 6 shortcut service"
 [[ -f "$HOME/.local/bin/unrelated" ]] || fail "uninstaller removed unrelated user file"
 
 mkdir -p "$HOME/.local/bin"
 printf 'user-owned\n' >"$HOME/.local/bin/omarchy-agent"
+printf '%s\n' '[services][omarchy-agent.desktop]' '_launch=Meta+X' >>"$HOME/.config/kglobalshortcutsrc"
 status=0
 "$installer" --dry-run >/dev/null 2>&1 || status=$?
-(( status != 0 )) || fail "installer overwrote a colliding command"
+(( status != 0 )) || fail "installer overwrote a colliding shortcut stanza"
+grep -Fqx '_launch=Meta+X' "$HOME/.config/kglobalshortcutsrc" || fail "shortcut collision changed existing config"
 [[ $(<"$HOME/.local/bin/omarchy-agent") == "user-owned" ]] || fail "collision check changed existing command"
 
 printf 'ok - installer, ownership manifest, collision guard, and rollback are verified\n'

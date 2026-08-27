@@ -3,6 +3,7 @@ set -Eeuo pipefail
 
 prefix=${KUBUNTU_INSTALL_PREFIX:-$HOME/.local/share/omarchy-kubuntu-ai}
 manifest="$prefix/install-manifest.tsv"
+shortcut_helper="$prefix/libexec/kubuntu-global-shortcut"
 mode=apply
 if [[ ${1:-} == "--dry-run" ]]; then
   mode=dry-run
@@ -29,6 +30,11 @@ if [[ $mode == dry-run ]]; then
 fi
 
 systemctl --user disable --now omarchy-agent-usage-update.timer 2>/dev/null || true
+while IFS=$'\t' read -r kind path target; do
+  if [[ "$kind" == config && -x "$shortcut_helper" ]]; then
+    "$shortcut_helper" remove "$path"
+  fi
+done <"$manifest"
 while IFS=$'\t' read -r kind path target; do
   case "$kind" in
     file)

@@ -41,10 +41,12 @@ for source in "${source_files[@]}"; do
 done
 
 user_bin="$HOME/.local/bin"
+shortcut_helper="$repo_root/kubuntu/libexec/kubuntu-global-shortcut"
+shortcut_config="$HOME/.config/kglobalshortcutsrc"
 link_sources=()
 while IFS= read -r path; do link_sources+=("$path"); done < <(
   for source in "$repo_root"/kubuntu/bin/* "$repo_root"/kubuntu/libexec/*; do
-    [[ -f "$source" && $(basename "$source") != '.gitkeep' ]] || continue
+    [[ -f "$source" && $(basename "$source") != '.gitkeep' && $(basename "$source") != 'kubuntu-global-shortcut' ]] || continue
     printf '%s\n' "$source"
   done
 )
@@ -61,17 +63,30 @@ for source in "${link_sources[@]}"; do
 done
 
 desktop_source="$repo_root/kubuntu/install/kubuntu-global-shortcut.desktop"
+service_source="$repo_root/kubuntu/install/kubuntu-global-shortcut-service.desktop"
 desktop_destination="$HOME/.local/share/applications/omarchy-agent.desktop"
-if [[ -e "$desktop_destination" ]] && ! cmp -s "$desktop_source" "$desktop_destination"; then
-  echo "Refusing to overwrite existing path: $desktop_destination" >&2
-  exit 1
-fi
+globalaccel_destination="$HOME/.local/share/kglobalaccel/omarchy-agent.desktop"
+for destination in "$desktop_destination" "$globalaccel_destination"; do
+  desktop_owned=false
+  if [[ -f "$manifest" ]] && grep -Fqx $'file\t'"$destination" "$manifest"; then
+    desktop_owned=true
+  fi
+  source="$desktop_source"
+  [[ "$destination" == "$globalaccel_destination" ]] && source="$service_source"
+  if [[ -e "$destination" ]] && ! cmp -s "$source" "$destination" && [[ "$desktop_owned" != true ]]; then
+    echo "Refusing to overwrite existing path: $destination" >&2
+    exit 1
+  fi
+done
+"$shortcut_helper" validate "$shortcut_config"
 
 if [[ $mode == dry-run ]]; then
   printf 'dry-run: install %d user-local files under %s\n' "${#source_files[@]}" "$prefix"
   printf 'dry-run: create %d command links under %s\n' "${#link_sources[@]}" "$user_bin"
   printf 'dry-run: install skills into .agents, .claude, .codex, .pi, and .gemini\n'
   printf 'dry-run: install KDE global shortcut under %s\n' "$desktop_destination"
+  printf 'dry-run: install KDE global-shortcut service under %s\n' "$globalaccel_destination"
+  printf 'dry-run: register KDE shortcut stanza under %s\n' "$shortcut_config"
   printf 'dry-run: install Hermes Harness and Omarchy Agents Plasma packages\n'
   printf 'dry-run: install user systemd units and usage timer\n'
   exit 0
@@ -101,6 +116,12 @@ desktop_destination="$HOME/.local/share/applications/omarchy-agent.desktop"
 mkdir -p "$(dirname "$desktop_destination")"
 install -m 644 "$desktop_source" "$desktop_destination"
 printf 'file\t%s\n' "$desktop_destination" >>"$manifest"
+globalaccel_destination="$HOME/.local/share/kglobalaccel/omarchy-agent.desktop"
+mkdir -p "$(dirname "$globalaccel_destination")"
+install -m 644 "$service_source" "$globalaccel_destination"
+printf 'file\t%s\n' "$globalaccel_destination" >>"$manifest"
+"$shortcut_helper" ensure "$shortcut_config"
+printf 'config\t%s\tservices][omarchy-agent.desktop\n' "$shortcut_config" >>"$manifest"
 
 for source in "${link_sources[@]}"; do
   name=$(basename "$source")

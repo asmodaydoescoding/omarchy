@@ -1,0 +1,147 @@
+#!/bin/bash
+set -Eeuo pipefail
+
+action=${1:-}
+config=${2:-}
+if [[ $action != "validate" && $action != "ensure" && $action != "remove" ]] || [[ -z $config ]]; then
+  printf 'Usage: kubuntu-global-shortcut <validate|ensure|remove> <kglobalshortcutsrc>\n' >&2
+  exit 1
+fi
+
+python3 - "$action" "$config" <<'PY'
+from __future__ import annotations
+
+import os
+from pathlib import Path
+import re
+import stat
+import sys
+import tempfile
+
+ACTION = sys.argv[1]
+PATH = Path(sys.argv[2])
+SECTION = "[services][omarchy-agent.desktop]"
+LEGACY_SECTION = "[omarchy-agent.desktop]"
+EXPECTED = {"_launch": "Meta+Shift+Ctrl+A"}
+LEGACY_EXPECTED = {
+    "_k_friendly_name": "Omarchy Default Agent",
+    "_launch": "Meta+Shift+Ctrl+A,none,omarchy-agent --pick",
+}
+SECTION_RE = re.compile(r"\[[^]]+\](?:\[[^]]+\])?$")
+
+
+def fail(message: str) -> None:
+    print(message, file=sys.stderr)
+    raise SystemExit(1)
+
+
+def bounds(lines: list[str], section: str) -> tuple[int, int] | None:
+    start = next((i for i, line in enumerate(lines) if line == section), None)
+    if start is None:
+        return None
+    end = len(lines)
+    for i in range(start + 1, len(lines)):
+        if SECTION_RE.fullmatch(lines[i]):
+            end = i
+            break
+    return start, end
+
+
+def entries(lines: list[str]) -> dict[str, str]:
+    result: dict[str, str] = {}
+    for line in lines:
+        if "=" not in line or not line:
+            continue
+        key, value = line.split("=", 1)
+        result[key] = value
+    return result
+
+
+def owned(block: list[str], expected: dict[str, str]) -> bool:
+    values = entries(block)
+    return all(values.get(key) == value for key, value in expected.items())
+
+
+def exact_block(block: list[str], expected: dict[str, str]) -> bool:
+    return [line for line in block if line] == [f"{key}={value}" for key, value in expected.items()]
+
+
+def write_atomic(text: str) -> None:
+    if PATH.is_symlink():
+        fail(f"Refusing to modify symlinked shortcut config: {PATH}")
+    PATH.parent.mkdir(parents=True, exist_ok=True)
+    mode = stat.S_IMODE(PATH.stat().st_mode) if PATH.exists() else 0o600
+    fd, temporary = tempfile.mkstemp(prefix=f".{PATH.name}.", dir=PATH.parent)
+    try:
+        os.chmod(temporary, mode)
+        with os.fdopen(fd, "w", encoding="utf-8", newline="\n") as handle:
+            handle.write(text)
+        os.replace(temporary, PATH)
+    except BaseException:
+        try:
+            os.unlink(temporary)
+        except FileNotFoundError:
+            pass
+        raise
+
+
+def remove_section(lines: list[str], section: str, expected: dict[str, str], strict: bool) -> tuple[list[str], bool]:
+    located = bounds(lines, section)
+    if located is None:
+        return lines, False
+    start, end = located
+    block = lines[start + 1 : end]
+    if not owned(block, expected) or (strict and not exact_block(block, expected)):
+        return lines, False
+    return lines[:start] + lines[end:], True
+
+
+if PATH.exists():
+    try:
+        lines = PATH.read_text(encoding="utf-8").splitlines()
+    except (OSError, UnicodeError) as error:
+        fail(f"Unable to read shortcut config {PATH}: {error}")
+else:
+    lines = []
+
+new_location = bounds(lines, SECTION)
+legacy_location = bounds(lines, LEGACY_SECTION)
+if new_location is not None:
+    if not owned(lines[new_location[0] + 1 : new_location[1]], EXPECTED):
+        fail(f"Refusing to overwrite existing shortcut stanza: {PATH}")
+if legacy_location is not None:
+    if not owned(lines[legacy_location[0] + 1 : legacy_location[1]], LEGACY_EXPECTED):
+        fail(f"Refusing to overwrite existing shortcut stanza: {PATH}")
+
+if ACTION == "validate":
+    raise SystemExit(0)
+
+if ACTION == "ensure":
+    if new_location is not None:
+        raise SystemExit(0)
+    if legacy_location is not None:
+        lines, changed = remove_section(lines, LEGACY_SECTION, LEGACY_EXPECTED, strict=True)
+        if not changed:
+            fail(f"Refusing to migrate modified shortcut stanza: {PATH}")
+    if lines and lines[-1] != "":
+        lines.append("")
+    lines.extend([SECTION, f"_launch={EXPECTED['_launch']}"])
+    write_atomic("\n".join(lines) + "\n")
+    raise SystemExit(0)
+
+changed = False
+for section, expected in ((SECTION, EXPECTED), (LEGACY_SECTION, LEGACY_EXPECTED)):
+    lines, removed = remove_section(lines, section, expected, strict=True)
+    changed = changed or removed
+
+if not changed:
+    raise SystemExit(0)
+
+while len(lines) > 1 and lines[-1] == "" and lines[-2] == "":
+    lines.pop()
+if not any(lines):
+    if PATH.exists() and not PATH.is_symlink():
+        PATH.unlink()
+else:
+    write_atomic("\n".join(lines) + "\n")
+PY
