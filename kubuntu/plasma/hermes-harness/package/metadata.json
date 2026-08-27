@@ -1,0 +1,17 @@
+{
+  "KPlugin": {
+    "Authors": [
+      {
+        "Name": "Asmoday"
+      }
+    ],
+    "Category": "System Information",
+    "Description": "Hermes installation, gateway, model, session, and node status",
+    "Icon": "applications-science",
+    "Id": "com.asmoday.omarchy.hermes-harness",
+    "Name": "Hermes Harness",
+    "Version": "0.1.0"
+  },
+  "X-Plasma-API-Minimum-Version": "6.0",
+  "KPackageStructure": "Plasma/Applet"
+}
