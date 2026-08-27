@@ -1,0 +1,27 @@
+#!/bin/bash
+set -Eeuo pipefail
+
+selection=$(kdialog \
+  --title "Default Agent" \
+  --menu "Choose default agent" \
+  pi "Pi" \
+  omp "Oh My Pi" \
+  opencode "OpenCode" \
+  ori "Ori" \
+  claude "Claude Code" \
+  codex "Codex" \
+  grok "Grok" \
+  agy "Antigravity" \
+  copilot "GitHub Copilot" \
+  crush "Crush" \
+) || exit $?
+
+case "$selection" in
+  pi|omp|opencode|ori|claude|codex|grok|agy|copilot|crush)
+    exec omarchy-default-agent "$selection"
+    ;;
+  *)
+    echo "No supported agent selected" >&2
+    exit 1
+    ;;
+esac
