@@ -42,7 +42,7 @@ class KubuntuPortLayoutTest(unittest.TestCase):
             self.assertTrue((KUBUNTU / directory).is_dir(), directory)
 
         allowed_files = {"README.md", "port-manifest.json"}
-        allowed_roots = {"ai-core", "bin", "install", "libexec", "plasma", "skills", "tests"}
+        allowed_roots = {"ai-core", "bin", "install", "libexec", "plasma", "skills", "systemd", "tests"}
         for path in KUBUNTU.rglob("*"):
             if path.is_file() and path.name != ".gitkeep":
                 relative = path.relative_to(KUBUNTU)
