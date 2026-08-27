@@ -1,0 +1,27 @@
+#!/bin/bash
+set -uo pipefail
+
+timeout_seconds=${1:-10}
+if [[ ! $timeout_seconds =~ ^[0-9]+$ ]]; then
+  echo "Timeout must be a non-negative integer" >&2
+  exit 1
+fi
+
+notification_server_ready() {
+  busctl --user call \
+    org.freedesktop.Notifications \
+    /org/freedesktop/Notifications \
+    org.freedesktop.Notifications \
+    GetServerInformation >/dev/null 2>&1
+}
+
+attempts=$((timeout_seconds * 10))
+while ((attempts > 0)); do
+  if notification_server_ready; then
+    exit 0
+  fi
+  attempts=$((attempts - 1))
+  sleep 0.1
+done
+
+exit 1
