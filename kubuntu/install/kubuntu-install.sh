@@ -26,7 +26,7 @@ for rel_root in ('ai-core','bin','libexec','skills','voxtype','systemd','plasma'
     if not base.exists():
         continue
     for path in sorted(base.rglob('*')):
-        if path.is_file() and path.name != '.gitkeep':
+        if path.is_file() and path.name != '.gitkeep' and '__pycache__' not in path.parts and path.suffix != '.pyc':
             print(path)
 PY
 )

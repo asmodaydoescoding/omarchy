@@ -41,6 +41,9 @@ grep -Fq 'dry-run:' <<<"$output" || fail "installer dry-run did not report"
 "$installer" --user
 [[ -x "$prefix/bin/omarchy-agent" ]] || fail "installer did not copy agent command"
 [[ -x "$prefix/libexec/kubuntu-agent-terminal" ]] || fail "installer did not copy libexec adapter"
+if find "$prefix" -type f \( -name '*.pyc' -o -path '*/__pycache__/*' \) -print -quit | grep -q .; then
+  fail "installer copied generated Python bytecode"
+fi
 [[ -L "$HOME/.local/bin/omarchy-agent" ]] || fail "installer did not create command link"
 [[ $(readlink -f "$HOME/.local/bin/omarchy-agent") == "$prefix/bin/omarchy-agent" ]] || fail "agent link points to wrong source"
 [[ $(readlink -f "$HOME/.local/bin/kubuntu-agent-terminal") == "$prefix/libexec/kubuntu-agent-terminal" ]] || fail "libexec link points to wrong source"
