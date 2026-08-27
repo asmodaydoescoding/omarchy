@@ -11,6 +11,7 @@ Usage: omarchy agent [prompt|usage-update|crash] [args...]
        omarchy install ai <chatgpt|grok-bot|lm-studio|ollama|t3-code> [--dry-run|--apply]
        omarchy remove ai <chatgpt|grok-bot|lm-studio|ollama|t3-code> [--dry-run|--apply]
        omarchy voxtype <install|remove|model|config|status>
+       omarchy theme refresh
 USAGE
 }
 
@@ -87,6 +88,11 @@ case "${1:-}" in
       status) exec omarchy-voxtype-status "$@" ;;
       *) usage; exit 1 ;;
     esac
+    ;;
+  theme)
+    [[ ${2:-} == refresh ]] || { usage; exit 1; }
+    shift 2
+    exec omarchy-theme-refresh "$@"
     ;;
   --help|-h|"")
     usage

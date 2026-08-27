@@ -10,7 +10,7 @@ log_file="$tmp_dir/log"
 mkdir -p "$fake_bin"
 : >"$log_file"
 
-for name in omarchy-agent omarchy-agent-prompt omarchy-default-agent omarchy-agent-usage-update omarchy-agent-crash omarchy-crash-mute omarchy-toggle-crash-capture omarchy-notification-send omarchy-voxtype-install omarchy-voxtype-remove omarchy-install-ai-chatgpt omarchy-remove-ai-chatgpt; do
+for name in omarchy-agent omarchy-agent-prompt omarchy-default-agent omarchy-agent-usage-update omarchy-agent-crash omarchy-crash-mute omarchy-toggle-crash-capture omarchy-notification-send omarchy-voxtype-install omarchy-voxtype-remove omarchy-install-ai-chatgpt omarchy-remove-ai-chatgpt omarchy-theme-refresh; do
   cat >"$fake_bin/$name" <<'SCRIPT'
 #!/bin/bash
 printf '%s' "${0##*/}" >>"$ROUTER_LOG"
@@ -64,6 +64,8 @@ assert_last 'omarchy-install-ai-chatgpt arg=--dry-run'
 assert_last 'omarchy-remove-ai-chatgpt arg=--dry-run'
 "$router" voxtype install --dry-run
 assert_last 'omarchy-voxtype-install arg=--dry-run'
+"$router" theme refresh
+assert_last "omarchy-theme-refresh arg=''"
 
 if "$router" unsupported >/dev/null 2>&1; then
   fail "unsupported router command succeeded"

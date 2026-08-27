@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# omarchy:summary=Refresh agent themes from the current Omarchy theme.
+# omarchy:hidden=true
+
+set -euo pipefail
+
+script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)
+
+"$script_dir/omarchy-theme-set-claude"
+"$script_dir/omarchy-theme-set-pi"
+"$script_dir/omarchy-theme-set-opencode"
