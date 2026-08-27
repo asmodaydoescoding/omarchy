@@ -1,0 +1,13 @@
+#!/bin/bash
+set -euo pipefail
+
+if [[ ${1:-} == --app-id=* ]]; then
+  shift
+fi
+
+if (($# == 0)); then
+  echo "Usage: kubuntu-agent-terminal [--app-id=<id>] <command> [args...]" >&2
+  exit 2
+fi
+
+exec konsole --separate --workdir "$PWD" -e "$@"
