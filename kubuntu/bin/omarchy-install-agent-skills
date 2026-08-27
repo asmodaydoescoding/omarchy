@@ -1,0 +1,31 @@
+#!/bin/bash
+set -Eeuo pipefail
+
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+skills_root="${KUBUNTU_SKILLS_ROOT:-$script_dir/../skills}"
+
+if [[ ! -d "$skills_root" ]]; then
+  echo "Skill directory not found: $skills_root" >&2
+  exit 1
+fi
+
+targets=(
+  "$HOME/.agents/skills"
+  "$HOME/.claude/skills"
+  "$HOME/.codex/skills"
+  "$HOME/.pi/agent/skills"
+  "$HOME/.gemini/config/skills"
+)
+
+for target in "${targets[@]}"; do
+  mkdir -p "$target"
+done
+
+for skill_path in "$skills_root"/*/; do
+  [[ -d "$skill_path" ]] || continue
+  skill_path=${skill_path%/}
+  skill_name=${skill_path##*/}
+  for target in "${targets[@]}"; do
+    ln -sfn "$skill_path" "$target/$skill_name"
+  done
+done
