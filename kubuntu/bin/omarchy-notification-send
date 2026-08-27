@@ -1,0 +1,103 @@
+#!/bin/bash
+set -Eeuo pipefail
+
+headline=""
+description=""
+urgency="low"
+app_name="omarchy-action"
+icon=""
+expire_timeout=""
+replace_id=""
+print_id=0
+exec_args=()
+
+usage() {
+  echo "Usage: omarchy-notification-send [options] <headline> [description] [--exec <program> [args...]]" >&2
+}
+
+while (($# > 0)); do
+  case "$1" in
+    --app-name|-g|--glyph|-u|--urgency|-i|--icon|-t|--expire-time|-r|--replace-id)
+      (($# >= 2)) || { echo "Missing value for $1" >&2; usage; exit 1; }
+      case "$1" in
+        --app-name) app_name=$2 ;;
+        -g|--glyph) ;;
+        -u|--urgency) urgency=$2 ;;
+        -i|--icon) icon=$2 ;;
+        -t|--expire-time) expire_timeout=$2 ;;
+        -r|--replace-id) replace_id=$2 ;;
+      esac
+      shift 2
+      ;;
+    --app-name=*|--urgency=*|--icon=*|--expire-time=*|--replace-id=*)
+      opt=${1%%=*}; val=${1#*=}
+      case "$opt" in
+        --app-name) app_name=$val ;;
+        --urgency) urgency=$val ;;
+        --icon) icon=$val ;;
+        --expire-time) expire_timeout=$val ;;
+        --replace-id) replace_id=$val ;;
+      esac
+      shift
+      ;;
+    -p|--print-id)
+      print_id=1
+      shift
+      ;;
+    --image)
+      (($# >= 2)) || { echo "Missing value for $1" >&2; usage; exit 1; }
+      shift 2
+      ;;
+    --)
+      shift
+      break
+      ;;
+    *)
+      break
+      ;;
+  esac
+done
+
+if (($# < 1)); then
+  usage
+  exit 1
+fi
+headline=$1
+shift
+
+if (($# > 0)) && [[ $1 != "--exec" ]]; then
+  description=$1
+  shift
+fi
+
+if (($# > 0)); then
+  [[ $1 == "--exec" ]] || { echo "Unknown option: $1" >&2; usage; exit 1; }
+  shift
+  exec_args=("$@")
+  ((${#exec_args[@]} > 0)) || { echo "--exec needs a command" >&2; exit 1; }
+fi
+
+case "$urgency" in
+  low|normal|critical) ;;
+  *) echo "Unknown urgency: $urgency" >&2; exit 1 ;;
+esac
+
+notify_cmd=(notify-send --app-name "$app_name" --urgency "$urgency")
+[[ -n "$icon" ]] && notify_cmd+=(--icon "$icon")
+[[ -n "$expire_timeout" ]] && notify_cmd+=(--expire-time "$expire_timeout")
+[[ -n "$replace_id" ]] && notify_cmd+=(--replace-id "$replace_id")
+((print_id)) && notify_cmd+=(--print-id)
+
+if ((${#exec_args[@]} > 0)); then
+  notify_cmd+=(--action=diagnose="Diagnose with AI" --wait)
+fi
+notify_cmd+=(-- "$headline" "$description")
+
+if ((${#exec_args[@]} > 0)); then
+  action=$("${notify_cmd[@]}")
+  if [[ $action == "diagnose" ]]; then
+    exec "${exec_args[@]}"
+  fi
+else
+  "${notify_cmd[@]}"
+fi

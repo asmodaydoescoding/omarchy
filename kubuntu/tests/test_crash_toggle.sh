@@ -29,7 +29,7 @@ chmod +x "$fake_bin"/*
 export HOME="$test_home"
 export SYSTEM_LOG="$system_log"
 export NOTIFY_LOG="$notify_log"
-export PATH="$repo_root/kubuntu/bin:$fake_bin:/usr/bin:/bin"
+export PATH="$fake_bin:$repo_root/kubuntu/bin:/usr/bin:/bin"
 
 fail() {
   printf 'not ok - %s\n' "$1" >&2
