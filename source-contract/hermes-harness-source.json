@@ -1,0 +1,114 @@
+{
+  "repository": "omarchy-hermes-harness",
+  "source_ref": "main",
+  "source_commit": "2d7268800ee36eb36ba837c9755ebb3536f73d62",
+  "checkout": "/home/xenofon/Work/omarchy-kubuntu-ai/upstream/omarchy-hermes-harness",
+  "paths": [
+    {
+      "path": "BarWidget.qml",
+      "exists": true,
+      "sha256": "b24658983026589d99b3ca56f42a78a3b8e82b0e755b5d8a07a32e9783bda2ba",
+      "bytes": 2043,
+      "executable": false
+    },
+    {
+      "path": "LICENSE",
+      "exists": true,
+      "sha256": "9795cb7c4916590cfef3526651ade55b9aec54ea93f110f545cdfac820bda105",
+      "bytes": 1061,
+      "executable": false
+    },
+    {
+      "path": "Panel.qml",
+      "exists": true,
+      "sha256": "33725f38ae0390d51eae51257b78ccf724faec1ac9c3d2a5e9ba87247d0c9824",
+      "bytes": 7322,
+      "executable": false
+    },
+    {
+      "path": "README.md",
+      "exists": true,
+      "sha256": "bb4dcbdd051dcc6a32f7e691e217251aa1ba65c76b51dd2a85d69dc793211c5e",
+      "bytes": 2406,
+      "executable": false
+    },
+    {
+      "path": "docs/architecture.md",
+      "exists": true,
+      "sha256": "970947858b2e6261db0e9d0afc05cea1ba6bc28a1ab7d9fa6e0e0e04f78d61af",
+      "bytes": 4304,
+      "executable": false
+    },
+    {
+      "path": "docs/security.md",
+      "exists": true,
+      "sha256": "ad10da887c93e5d7e076a95dd0f2470201ef4dcff9c7575580112a8fbc48b8a0",
+      "bytes": 4505,
+      "executable": false
+    },
+    {
+      "path": "docs/telemetry.md",
+      "exists": true,
+      "sha256": "92122dbcaa85637eff1d3abd45fe37e841b8c85d6707a7f443049d6bb42f5e1e",
+      "bytes": 4449,
+      "executable": false
+    },
+    {
+      "path": "docs/troubleshooting.md",
+      "exists": true,
+      "sha256": "56f727256690be12d7c7d7a92ab18c81fad4d66b11a89565370ddd517c860f58",
+      "bytes": 4028,
+      "executable": false
+    },
+    {
+      "path": "manifest.json",
+      "exists": true,
+      "sha256": "c7a5a8a4ea5912a5df0f86bd80b12909b7a139472428735eb5b4f44e2cd8c87d",
+      "bytes": 942,
+      "executable": false
+    },
+    {
+      "path": "scripts/hermes-safe-io",
+      "exists": true,
+      "sha256": "6c9c7bdd0208d14d9755264d897c44cc27bf47380d5e752802bea55222bde6c9",
+      "bytes": 5277,
+      "executable": true
+    },
+    {
+      "path": "scripts/hermes-status",
+      "exists": true,
+      "sha256": "801e153f0987adf67e3f8c812b91e65616d92d5e838ba535bb62d51b35be8f91",
+      "bytes": 3406,
+      "executable": true
+    },
+    {
+      "path": "skill/SKILL.md",
+      "exists": true,
+      "sha256": "3449524c425db2f38cdd9ec722f1db96b860e0b00ca47433a34c38f41850e380",
+      "bytes": 5859,
+      "executable": false
+    }
+  ],
+  "feature_groups": {
+    "harness": {
+      "description": "Hermes Harness status and launch surface.",
+      "observable_behavior": "Hermes Harness status/launch plugin; left panel, middle refresh, right launch; installed/version/gatewayState/activeModel/currentSessionId/currentSessionTitle/hermesNodeAvailable/nodesOnline/nodesTotal/nodes; safe bounded reads and subprocess capture; no credentials.",
+      "kubuntu_seam": "Kubuntu replaces Quickshell/Omarchy plugin injection with a Plasma 6 compact/full plasmoid while preserving telemetry, interaction, and security contracts.",
+      "parity_test": "test_hermes_status.sh and test_hermes_safe_io.py",
+      "paths": [
+        "BarWidget.qml",
+        "LICENSE",
+        "Panel.qml",
+        "README.md",
+        "docs/architecture.md",
+        "docs/security.md",
+        "docs/telemetry.md",
+        "docs/troubleshooting.md",
+        "manifest.json",
+        "scripts/hermes-safe-io",
+        "scripts/hermes-status",
+        "skill/SKILL.md"
+      ]
+    }
+  }
+}

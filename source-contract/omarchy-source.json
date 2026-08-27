@@ -1,0 +1,739 @@
+{
+  "repository": "omarchy",
+  "source_ref": "quattro",
+  "source_commit": "946704f30950576731d91a732b743f7c7fa8b188",
+  "checkout": "/home/xenofon/Work/omarchy-kubuntu-ai/upstream/omarchy",
+  "paths": [
+    {
+      "path": "bin/omarchy",
+      "exists": true,
+      "sha256": "760662fc935350fa9157aa8f7826480e2aa33482b0c297d7ee41e8707ddf5161",
+      "bytes": 27955,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-agent",
+      "exists": true,
+      "sha256": "5b1a125125545a4ca2cfc76b5573271b1175be6fb2d38f399d2f01e0e6f37649",
+      "bytes": 3373,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-agent-prompt",
+      "exists": true,
+      "sha256": "bc49cec0c157fd2f9d820bc351273ba151032b233d54b787d59f8e75100c06e1",
+      "bytes": 543,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-default-agent",
+      "exists": true,
+      "sha256": "0a1685231500c94743706460af16d4777b84f5aa477c0b92383fafd463c2980f",
+      "bytes": 2127,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-mise-install",
+      "exists": true,
+      "sha256": "a99edee09a3f34752a730801061775bbc5688a3b29f01e60b4e811ef0ce1d0d8",
+      "bytes": 822,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-launch-tui",
+      "exists": true,
+      "sha256": "f53f3f4747be5e19df5fc1e2fb91786a93c839cec84449a0fc13489a795577c0",
+      "bytes": 346,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-launch-floating-terminal-with-presentation",
+      "exists": true,
+      "sha256": "01c6af7dcc7d76c23b5f95f594516195d569ede9f0f8f48f932ec5ff3531a08f",
+      "bytes": 534,
+      "executable": true
+    },
+    {
+      "path": "install/user/mise.sh",
+      "exists": true,
+      "sha256": "15c74b764c8ed5bc71d221a222d38e806625ceccecae9643dd91e039b553c9ed",
+      "bytes": 577,
+      "executable": false
+    },
+    {
+      "path": "install/user/mise-work.sh",
+      "exists": true,
+      "sha256": "b8920d1d2d5b3f7db64401c52858136f33fa9f476c353ccd1000d42ee1443bc3",
+      "bytes": 1661,
+      "executable": false
+    },
+    {
+      "path": "install/user/first-run/setup-agent.hook",
+      "exists": true,
+      "sha256": "98aba3f4cc5eee152ef2a21845d272bc5ca42d233ea5bb8511f2d49c953ae80b",
+      "bytes": 433,
+      "executable": false
+    },
+    {
+      "path": "default/omarchy/omarchy-menu.jsonc",
+      "exists": true,
+      "sha256": "6aa6a7378354d3443e8d6c2975cfd18219ee95bca99d084777d3e8357d2ccaf1",
+      "bytes": 51618,
+      "executable": false
+    },
+    {
+      "path": "default/bash/aliases",
+      "exists": true,
+      "sha256": "70d30abe2c2a550624d521f6162900310cbfa4a479510c7d13384013e3ca6366",
+      "bytes": 1831,
+      "executable": false
+    },
+    {
+      "path": "default/hypr/qconsole.lua",
+      "exists": true,
+      "sha256": "0650dda0af92fe99847ec342a8af02e7b4fb0d4738fc02fe06a78be22afa2f09",
+      "bytes": 3711,
+      "executable": false
+    },
+    {
+      "path": "test/shell.d/default-agent-test.sh",
+      "exists": true,
+      "sha256": "e2afde07e3a8392495541be2c89c405244e87a7c4dfc8a6598b91daba50728a0",
+      "bytes": 22583,
+      "executable": false
+    },
+    {
+      "path": "test/shell.d/agent-invitation-test.sh",
+      "exists": true,
+      "sha256": "dc7d154d67f03fd406d2f360c669aec372f416c3700b7ba7483c25b769dc40f8",
+      "bytes": 2269,
+      "executable": false
+    },
+    {
+      "path": "bin/omarchy-agent-usage-claude",
+      "exists": true,
+      "sha256": "88938e35170a5ef8da30b665114740440eb3bd68dba9579a818e8b02c4a0ffc3",
+      "bytes": 34228,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-agent-usage-codex",
+      "exists": true,
+      "sha256": "821f627f1be5ac691f70885060d0b2b65a14972162f82962e7a5575badaf39dd",
+      "bytes": 21597,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-agent-usage-fireworks",
+      "exists": true,
+      "sha256": "f8b1c47fbaf63f2a4f6e54f5d75bd7c09755de9c802ebe944a717c590e99ba5a",
+      "bytes": 17930,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-agent-usage-update",
+      "exists": true,
+      "sha256": "49b790ec623a94db2eb41cd4195946446fe778a292448ee61d040db9e0ac767a",
+      "bytes": 1814,
+      "executable": true
+    },
+    {
+      "path": "shell/plugins/agents/Agent.qml",
+      "exists": true,
+      "sha256": "9fa9a8650ecbc2f2f691b01da7419fa0620b6066c423eea8d50f6253ddf6f4e3",
+      "bytes": 874,
+      "executable": false
+    },
+    {
+      "path": "shell/plugins/agents/Main.qml",
+      "exists": true,
+      "sha256": "fc61e5e06325dd6eb3d100b1f3eead4c6ed8b62b58bda209c70a82084e23f3c7",
+      "bytes": 26714,
+      "executable": false
+    },
+    {
+      "path": "shell/plugins/agents/Panel.qml",
+      "exists": true,
+      "sha256": "b45143d843858a7ae1aeaef7def36c722a7bfb74557063bd1ad5dbb63952fb41",
+      "bytes": 32307,
+      "executable": false
+    },
+    {
+      "path": "shell/plugins/agents/README.md",
+      "exists": true,
+      "sha256": "34160fb26e62609839b6b0019a5d79fdd31b4f8f48c148eaf7fec3372c2a910e",
+      "bytes": 7429,
+      "executable": false
+    },
+    {
+      "path": "shell/plugins/agents/manifest.json",
+      "exists": true,
+      "sha256": "11bbc83df813fc5862a2ca34399486f19772ebdffe56ee1fe5dde9265a40703f",
+      "bytes": 1943,
+      "executable": false
+    },
+    {
+      "path": "shell/plugins/agents/assets/claude.svg",
+      "exists": true,
+      "sha256": "0df6dad23995f5a76c6db8cc2a4e646ff45bd7a0626ef98662a7025646e5eea1",
+      "bytes": 1999,
+      "executable": false
+    },
+    {
+      "path": "shell/plugins/agents/assets/codex.svg",
+      "exists": true,
+      "sha256": "f1aeeba6d631feca31129bbc06ac7f813078d6bafa3837061e0ead173f36b857",
+      "bytes": 1354,
+      "executable": false
+    },
+    {
+      "path": "shell/plugins/agents/assets/codex-light.svg",
+      "exists": true,
+      "sha256": "dc510dda4e7e43c214e6a5a023b9909bc645b45f2fdde537ee6d6b09f1bbc111",
+      "bytes": 1354,
+      "executable": false
+    },
+    {
+      "path": "shell/plugins/agents/assets/fireworks.svg",
+      "exists": true,
+      "sha256": "842f35cc7d5f20f8a6f08fddc78f206812a3b9f2c104e09916a5f536058941ed",
+      "bytes": 328,
+      "executable": false
+    },
+    {
+      "path": "test/shell.d/agent-usage-claude-limits-test.sh",
+      "exists": true,
+      "sha256": "5f9207f8d001de954efac9df2a0d8961a869563e09b55acd69cf4296480055a9",
+      "bytes": 11956,
+      "executable": false
+    },
+    {
+      "path": "test/shell.d/agent-usage-claude-scanner-test.sh",
+      "exists": true,
+      "sha256": "c96bf90745446977e6f8906526dcf6a43950e9f0cc450af75abf082c1ac307b2",
+      "bytes": 9312,
+      "executable": false
+    },
+    {
+      "path": "test/shell.d/agent-usage-codex-scanner-test.sh",
+      "exists": true,
+      "sha256": "79e363c5144eff6892945aa12188a487ac8be492c3a08a1be941d85682638d3f",
+      "bytes": 27490,
+      "executable": false
+    },
+    {
+      "path": "test/shell.d/agent-usage-fireworks-scanner-test.sh",
+      "exists": true,
+      "sha256": "aaaab6253d282fec15f7150a212908bbd27a796e8cd5d65306a1fef15b147792",
+      "bytes": 10024,
+      "executable": true
+    },
+    {
+      "path": "test/shell.d/agent-usage-update-test.sh",
+      "exists": true,
+      "sha256": "96af98ed0b54900f4b3bf26ec6e923c1cf5e78a1c13886305b6e8190f2ef2c0c",
+      "bytes": 2157,
+      "executable": true
+    },
+    {
+      "path": "test/shell.d/agents-panel-test.sh",
+      "exists": true,
+      "sha256": "eede7988e0c6f1a68aca0326ec7a40bb0850fbc9d82da950515a66ef3ac59c13",
+      "bytes": 986,
+      "executable": true
+    },
+    {
+      "path": "test/shell.d/agents-default-migration-test.sh",
+      "exists": true,
+      "sha256": "ffa6e4dff2e10269a4eda20706f082f37dd55c315916a55eef107b137206313d",
+      "bytes": 4225,
+      "executable": true
+    },
+    {
+      "path": "test/shell.d/agents-rename-migration-test.sh",
+      "exists": true,
+      "sha256": "adb41341a11ae6ba507fcd41873c0e759e9ffa0e26bb4835eb241adc276e452c",
+      "bytes": 2391,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-agent-crash",
+      "exists": true,
+      "sha256": "a2a100e49904a41958c32344e54eba1e63afbaa0b6fca24177cb26e64b8dfa20",
+      "bytes": 1573,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-crash-watch",
+      "exists": true,
+      "sha256": "7ecdd3e247d83a86dee717868b7dcbb957d9ddee79674881c1917894cb8e6d37",
+      "bytes": 4804,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-crash-mute",
+      "exists": true,
+      "sha256": "2479fe20ee9d99b76e8be8c968745640cdb713199a6bf6e32a8ceb5bdccebca7",
+      "bytes": 2143,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-toggle-crash-capture",
+      "exists": true,
+      "sha256": "5090357c88f3d11af66614f254891b5a30a0567fda108f1ec230a13fa01dd2f2",
+      "bytes": 659,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-notification-send",
+      "exists": true,
+      "sha256": "93f2e88fe86b03cc636a451cc0b1d766970ef85f32e98eb4fde2bd48a4ba1345",
+      "bytes": 6424,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-notification-wait",
+      "exists": true,
+      "sha256": "7bc22bf41e3568ecacacc88d6a442e2b3aa75a550f845e5ae8b79a5c7c82d424",
+      "bytes": 751,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-toggle",
+      "exists": true,
+      "sha256": "f1e8dfb25e31a79fc8c5a4e6e9c1c91cd60a97a854c2e2a401793155980fee5c",
+      "bytes": 660,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-toggle-enabled",
+      "exists": true,
+      "sha256": "5f5b2797e2f5912f0c5e19f02ede429fdc2952dbf3f3d0c31f1d6e2964006988",
+      "bytes": 156,
+      "executable": true
+    },
+    {
+      "path": "default/systemd/user/omarchy-crash-watch.service",
+      "exists": true,
+      "sha256": "4686e1de402db75c10d1584f0cb3fbcb166d63dce632c3b4b51dc844a9433259",
+      "bytes": 652,
+      "executable": false
+    },
+    {
+      "path": "default/agents/skills/diagnose-crash/SKILL.md",
+      "exists": true,
+      "sha256": "0762bb8c913a9026a143ee7213caebe334654efeb0d37949aa05ddd1e2639072",
+      "bytes": 5710,
+      "executable": false
+    },
+    {
+      "path": "default/agents/skills/diagnose-crash/reporting.md",
+      "exists": true,
+      "sha256": "c0d5bc6f0278bf7eb60af9cdf03fde563fa23063863167168529b66cb9535edc",
+      "bytes": 3945,
+      "executable": false
+    },
+    {
+      "path": "test/shell.d/crash-capture-test.sh",
+      "exists": true,
+      "sha256": "31534cd9e97f844e96d0380de7da77f175d6ee50ba7e84c84588e4c7b89156b8",
+      "bytes": 15739,
+      "executable": true
+    },
+    {
+      "path": "default/agents/skills/omarchy/SKILL.md",
+      "exists": true,
+      "sha256": "a8d88cfbb12e65f6bae1be57dfaeb4a368d313d842911635302752ec2d06adbe",
+      "bytes": 13248,
+      "executable": false
+    },
+    {
+      "path": "default/agents/skills/omarchy/capture.md",
+      "exists": true,
+      "sha256": "6a2d9dad19ee614f600fefcff4eef493389cb750d7fffc44be67e034eac0a96e",
+      "bytes": 2217,
+      "executable": false
+    },
+    {
+      "path": "default/agents/skills/omarchy/contributing.md",
+      "exists": true,
+      "sha256": "469920b9dabcce0f392ce45d09a1672c4e2dd3789f5bfc4489b4c6e462dca9c6",
+      "bytes": 2385,
+      "executable": false
+    },
+    {
+      "path": "default/agents/skills/omarchy/hooks.md",
+      "exists": true,
+      "sha256": "9bffaac7f1e0b8666729e82d0eb43b2a03680166c5c8f972ee3a7285b317386a",
+      "bytes": 1063,
+      "executable": false
+    },
+    {
+      "path": "default/agents/skills/omarchy/hyprland.md",
+      "exists": true,
+      "sha256": "da496e069392ce60599a6d745bb68d4a5f770fe72634f4f64a9a8d75b8fbacd4",
+      "bytes": 3376,
+      "executable": false
+    },
+    {
+      "path": "default/agents/skills/omarchy/plugins.md",
+      "exists": true,
+      "sha256": "1bec65633bb5b0b2c7582b2ab38046aa43d1ac692bd50e48d548701519d4ad55",
+      "bytes": 1820,
+      "executable": false
+    },
+    {
+      "path": "default/agents/skills/omarchy/theming.md",
+      "exists": true,
+      "sha256": "2122773366e589c36ddd9a4b74b9bb96da96190b5f1434197e0a1ffad0942d36",
+      "bytes": 3245,
+      "executable": false
+    },
+    {
+      "path": "bin/omarchy-theme-set",
+      "exists": true,
+      "sha256": "79f60d66f5ab01a3faa05a35a0410ed81143413ac66860a54d48ea340fa3af14",
+      "bytes": 11398,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-theme-refresh",
+      "exists": true,
+      "sha256": "87213e723727893dcf020d534d6fab2c473729edcbd4beb2027ce59123ca6f7a",
+      "bytes": 259,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-theme-set-claude",
+      "exists": true,
+      "sha256": "29b11141cff82f06249d72f986958fc04567752f17a7eed7db023a6745933b18",
+      "bytes": 1665,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-theme-set-pi",
+      "exists": true,
+      "sha256": "cbee4837e2f329bf91f1e269a5b3a7b6f4db08afa432d48130c2c8351d40635a",
+      "bytes": 1488,
+      "executable": true
+    },
+    {
+      "path": "default/themed/claude.json.tpl",
+      "exists": true,
+      "sha256": "ed4da8adb897511b349466fec31910de744e1ca5927ab11fdba3cfcbb4827e94",
+      "bytes": 1773,
+      "executable": false
+    },
+    {
+      "path": "default/themed/pi.json.tpl",
+      "exists": true,
+      "sha256": "1f1aaf1334c29190a3f9bf6ec345e67795b80ba2826f435f09be8dd8d5484c86",
+      "bytes": 3228,
+      "executable": false
+    },
+    {
+      "path": "config/opencode/opencode.json",
+      "exists": true,
+      "sha256": "fb067af039252d48ef5b5c573a5e12c17357af4324b218aca5efa36f882846dd",
+      "bytes": 95,
+      "executable": false
+    },
+    {
+      "path": "test/shell.d/theme-staging-test.sh",
+      "exists": true,
+      "sha256": "7003dd02041ddc6bb024ae2a5f9600609dd6ca1541d98f980fdf8658f3a10343",
+      "bytes": 8778,
+      "executable": true
+    },
+    {
+      "path": "test/shell.d/vscode-theme-test.sh",
+      "exists": true,
+      "sha256": "e59b6f440152221eddebfec1a030cbf9b325d96fe6ad338b798b7e48c18a03fb",
+      "bytes": 1278,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-install-ai-chatgpt",
+      "exists": true,
+      "sha256": "27a1d71f3b80e1da6fde701afcd7c743a4292fdcdef6f44a12773270286341d3",
+      "bytes": 292,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-remove-ai-chatgpt",
+      "exists": true,
+      "sha256": "802afdd97c662ee2d89e45c950ef070fe8b7e6bc9787ac848927169e9768881c",
+      "bytes": 425,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-remove-ai-grok-bot",
+      "exists": true,
+      "sha256": "e97079dfbf507bbbc79c8973cdbb5f174615461839f84fe8ebcd446a83322ba9",
+      "bytes": 323,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-remove-ai-lm-studio",
+      "exists": true,
+      "sha256": "9dca6a0244068c3306fd960de582640d73fbb46ca4ad49834a2a08a11ce71bf2",
+      "bytes": 824,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-remove-ai-ollama",
+      "exists": true,
+      "sha256": "8802d50175b275a1a8485b937b2c0af38e187fad4441637b1eabb1fbd9580f73",
+      "bytes": 502,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-remove-ai-t3-code",
+      "exists": true,
+      "sha256": "9204b36c7a20b816a55aa1d69a15f09217c2f2117ce0abdf5f48fb4d53a2fe74",
+      "bytes": 441,
+      "executable": true
+    },
+    {
+      "path": "test/shell.d/remove-ai-test.sh",
+      "exists": true,
+      "sha256": "c034ca3d32b495889c5e29b6a407d6379f0c1be2e0dd276c576280ba1a9d3e4d",
+      "bytes": 3802,
+      "executable": false
+    },
+    {
+      "path": "bin/omarchy-voxtype-config",
+      "exists": true,
+      "sha256": "4b8e8c98dfc59955f0ebe2bfd93b8e485ad4f756889e0c71745a37667dff4434",
+      "bytes": 160,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-voxtype-install",
+      "exists": true,
+      "sha256": "72e582bb5c0610375ee5517ed9e3d4d7e6742a3fd82a6b4b1c4b453de418c525",
+      "bytes": 711,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-voxtype-model",
+      "exists": true,
+      "sha256": "f7b2c059ce76cf399c24fad6e1fa47d0947cbc514e54abda3fdaa33e8d67cddb",
+      "bytes": 163,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-voxtype-remove",
+      "exists": true,
+      "sha256": "99affac5ef89b06a5ed8da2e2eb6db47b4fdf02fb89d9ec351932054477334fc",
+      "bytes": 561,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-voxtype-status",
+      "exists": true,
+      "sha256": "f32ebb8f9980e932420e5adccbac74c3bccd27558ebcac1bef7d107c7f6a73e6",
+      "bytes": 491,
+      "executable": true
+    },
+    {
+      "path": "bin/omarchy-capture-text",
+      "exists": true,
+      "sha256": "4572f2e6508d9fc71dc63a0d845d987cb6cf3ee0ebe6a99bee6324e0b979e11c",
+      "bytes": 789,
+      "executable": true
+    },
+    {
+      "path": "default/hypr/bindings/voxtype.lua",
+      "exists": true,
+      "sha256": "ff39dcab7a834082abc12a5563c3b37ce434a39a1969a1ecb2f025553b69c446",
+      "bytes": 275,
+      "executable": false
+    },
+    {
+      "path": "default/voxtype/config.toml",
+      "exists": true,
+      "sha256": "0026bc1a85b92439e79a39f8a12a47f4148e91824c0c3ed893f77ba15a6902c3",
+      "bytes": 3383,
+      "executable": false
+    },
+    {
+      "path": "install/user/first-run/install-voxtype.hook",
+      "exists": true,
+      "sha256": "2e20b0aa831f2dacc0e4c575a38e2340ffe71aebebc831b54095d643375e9a24",
+      "bytes": 302,
+      "executable": false
+    },
+    {
+      "path": "shell/plugins/bar/indicators/Dictation.qml",
+      "exists": true,
+      "sha256": "581498154ecbfaa64dcc0612dbac417968b8567404c0cabb13fa092f339c7ac6",
+      "bytes": 778,
+      "executable": false
+    },
+    {
+      "path": "shell/plugins/bar/widgets/Indicators.qml",
+      "exists": true,
+      "sha256": "f64fc3a122d71e6cc1f9a8b8284416df29cac070306fa6df55e9f1053fe4cf65",
+      "bytes": 13812,
+      "executable": false
+    },
+    {
+      "path": "shell/plugins/bar/widgets/Indicators.manifest.json",
+      "exists": true,
+      "sha256": "3eea8a52c46d7e2436f8967abb4347d56163f7cef622caf0fe2d69bf6858d59b",
+      "bytes": 2056,
+      "executable": false
+    },
+    {
+      "path": "manual/11-text-extraction-dictation.md",
+      "exists": true,
+      "sha256": "481146daa0f3a3f105e492ee5c5df48482a2407cd2d71fcc47a7f2b0f2b8fc2f",
+      "bytes": 994,
+      "executable": false
+    },
+    {
+      "path": "test/shell.d/voxtype-invitation-test.sh",
+      "exists": true,
+      "sha256": "b9f4977352c63ef5afe9f366294b86c903f5f79dba98b284bbc2f86b3c63a424",
+      "bytes": 2047,
+      "executable": false
+    }
+  ],
+  "feature_groups": {
+    "agent_launch": {
+      "description": "Omarchy default coding-agent launch and lazy installation.",
+      "observable_behavior": "lazy mise wrappers; persisted default agent; exact aliases, prompt routing, inline/pick behavior, and source-specific unattended flags.",
+      "kubuntu_seam": "Kubuntu replaces only mise bootstrap, terminal window launch, global shortcut, and package backend; command vectors and XDG state remain source-compatible.",
+      "parity_test": "test_agent_launcher.sh and test_mise_wrappers.sh",
+      "paths": [
+        "bin/omarchy",
+        "bin/omarchy-agent",
+        "bin/omarchy-agent-prompt",
+        "bin/omarchy-default-agent",
+        "bin/omarchy-mise-install",
+        "bin/omarchy-launch-tui",
+        "bin/omarchy-launch-floating-terminal-with-presentation",
+        "install/user/mise.sh",
+        "install/user/mise-work.sh",
+        "install/user/first-run/setup-agent.hook",
+        "default/omarchy/omarchy-menu.jsonc",
+        "default/bash/aliases",
+        "default/hypr/qconsole.lua",
+        "test/shell.d/default-agent-test.sh",
+        "test/shell.d/agent-invitation-test.sh"
+      ]
+    },
+    "agent_usage": {
+      "description": "Omarchy Agents usage telemetry and display panel.",
+      "observable_behavior": "Claude, Codex, Fireworks collectors; one JSON record per collector; limits, balance, token charts, atomic writes, refresh filtering, and synced device aggregation.",
+      "kubuntu_seam": "Kubuntu keeps collector schemas and paths; only scheduler, command discovery, and Plasma rendering are adapted.",
+      "parity_test": "test_usage_update.sh and test_usage_collectors.sh",
+      "paths": [
+        "bin/omarchy-agent-usage-claude",
+        "bin/omarchy-agent-usage-codex",
+        "bin/omarchy-agent-usage-fireworks",
+        "bin/omarchy-agent-usage-update",
+        "shell/plugins/agents/Agent.qml",
+        "shell/plugins/agents/Main.qml",
+        "shell/plugins/agents/Panel.qml",
+        "shell/plugins/agents/README.md",
+        "shell/plugins/agents/manifest.json",
+        "shell/plugins/agents/assets/claude.svg",
+        "shell/plugins/agents/assets/codex.svg",
+        "shell/plugins/agents/assets/codex-light.svg",
+        "shell/plugins/agents/assets/fireworks.svg",
+        "test/shell.d/agent-usage-claude-limits-test.sh",
+        "test/shell.d/agent-usage-claude-scanner-test.sh",
+        "test/shell.d/agent-usage-codex-scanner-test.sh",
+        "test/shell.d/agent-usage-fireworks-scanner-test.sh",
+        "test/shell.d/agent-usage-update-test.sh",
+        "test/shell.d/agents-panel-test.sh",
+        "test/shell.d/agents-default-migration-test.sh",
+        "test/shell.d/agents-rename-migration-test.sh"
+      ]
+    },
+    "crash_diagnosis": {
+      "description": "Crash capture, notification, mute, and AI diagnosis.",
+      "observable_behavior": "systemd-coredump journal watch; current-user filtering; dedupe; critical notification to the default agent; per-program mute; global toggle; diagnose-crash skill; no automatic fix/report.",
+      "kubuntu_seam": "Kubuntu uses the existing user systemd manager, coredumpctl/journalctl, and KDE notification actions instead of Omarchy shell notification IPC.",
+      "parity_test": "test_crash_capture.sh",
+      "paths": [
+        "bin/omarchy-agent-crash",
+        "bin/omarchy-crash-watch",
+        "bin/omarchy-crash-mute",
+        "bin/omarchy-toggle-crash-capture",
+        "bin/omarchy-notification-send",
+        "bin/omarchy-notification-wait",
+        "bin/omarchy-toggle",
+        "bin/omarchy-toggle-enabled",
+        "default/systemd/user/omarchy-crash-watch.service",
+        "default/agents/skills/diagnose-crash/SKILL.md",
+        "default/agents/skills/diagnose-crash/reporting.md",
+        "test/shell.d/crash-capture-test.sh"
+      ]
+    },
+    "skills_theme": {
+      "description": "Agent skills and agent-facing theme synchronization.",
+      "observable_behavior": "Omarchy and diagnose-crash skills; agent skill links; generated Claude/Pi/OpenCode themes; atomic updates.",
+      "kubuntu_seam": "Kubuntu preserves skill target paths and generated files, adapting only the Plasma/Kubuntu theme source and event hook.",
+      "parity_test": "test_skills_and_theme_sync.sh",
+      "paths": [
+        "default/agents/skills/omarchy/SKILL.md",
+        "default/agents/skills/omarchy/capture.md",
+        "default/agents/skills/omarchy/contributing.md",
+        "default/agents/skills/omarchy/hooks.md",
+        "default/agents/skills/omarchy/hyprland.md",
+        "default/agents/skills/omarchy/plugins.md",
+        "default/agents/skills/omarchy/theming.md",
+        "bin/omarchy-theme-set",
+        "bin/omarchy-theme-refresh",
+        "bin/omarchy-theme-set-claude",
+        "bin/omarchy-theme-set-pi",
+        "default/themed/claude.json.tpl",
+        "default/themed/pi.json.tpl",
+        "config/opencode/opencode.json",
+        "test/shell.d/theme-staging-test.sh",
+        "test/shell.d/vscode-theme-test.sh"
+      ]
+    },
+    "ai_install_menu": {
+      "description": "The pinned Install > AI and Remove > AI menu surface.",
+      "observable_behavior": "ChatGPT Desktop, Dictation, Grok Bot, LM Studio, Ollama, T3 Code, with package-aware install/remove guards.",
+      "kubuntu_seam": "Arch package names are mapped to official Ubuntu/vendor installers; unsupported vendor artifacts remain explicit gaps and never become unofficial substitutes.",
+      "parity_test": "test_ai_installers.sh",
+      "paths": [
+        "bin/omarchy-install-ai-chatgpt",
+        "bin/omarchy-remove-ai-chatgpt",
+        "bin/omarchy-remove-ai-grok-bot",
+        "bin/omarchy-remove-ai-lm-studio",
+        "bin/omarchy-remove-ai-ollama",
+        "bin/omarchy-remove-ai-t3-code",
+        "default/omarchy/omarchy-menu.jsonc",
+        "test/shell.d/remove-ai-test.sh"
+      ]
+    },
+    "voxtype": {
+      "description": "Offline AI dictation and OCR-adjacent capture.",
+      "observable_behavior": "offline Whisper dictation; F9 push-to-talk; Super+Ctrl+X toggle; Voxtype config/model/status; optional OCR text capture.",
+      "kubuntu_seam": "KDE global shortcuts and KDE/Wayland typing backends replace Hyprland bindings while Voxtype paths/config remain compatible.",
+      "parity_test": "test_voxtype.sh",
+      "paths": [
+        "bin/omarchy-voxtype-config",
+        "bin/omarchy-voxtype-install",
+        "bin/omarchy-voxtype-model",
+        "bin/omarchy-voxtype-remove",
+        "bin/omarchy-voxtype-status",
+        "bin/omarchy-capture-text",
+        "default/hypr/bindings/voxtype.lua",
+        "default/voxtype/config.toml",
+        "install/user/first-run/install-voxtype.hook",
+        "shell/plugins/bar/indicators/Dictation.qml",
+        "shell/plugins/bar/widgets/Indicators.qml",
+        "shell/plugins/bar/widgets/Indicators.manifest.json",
+        "manual/11-text-extraction-dictation.md",
+        "test/shell.d/voxtype-invitation-test.sh"
+      ]
+    }
+  }
+}
