@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "project": "omarchy-kubuntu-ai",
+  "environmentVariable": "OMARCHY_KUBUNTU_AI_ROOT",
+  "installPrefix": "~/.local/share/omarchy-kubuntu-ai",
+  "sourceCheckouts": [
+    {
+      "name": "omarchy",
+      "path": "../upstream/omarchy",
+      "sourceRef": "quattro",
+      "sourceCommit": "946704f30950576731d91a732b743f7c7fa8b188"
+    },
+    {
+      "name": "omarchy-hermes-harness",
+      "path": "../upstream/omarchy-hermes-harness",
+      "sourceRef": "main",
+      "sourceCommit": "2d7268800ee36eb36ba837c9755ebb3536f73d62"
+    }
+  ],
+  "files": [],
+  "links": []
+}
