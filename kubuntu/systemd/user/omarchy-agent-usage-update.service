@@ -1,0 +1,7 @@
+[Unit]
+Description=Refresh Kubuntu Omarchy AI usage records
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/env omarchy-agent-usage-update --force
+Environment="PATH=%h/.local/share/omarchy-kubuntu-ai/bin:%h/.local/bin:/usr/bin:/bin"
