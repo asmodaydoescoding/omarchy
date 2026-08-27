@@ -21,7 +21,7 @@ while IFS= read -r path; do source_files+=("$path"); done < <(
 from pathlib import Path
 import sys
 root=Path(sys.argv[1])
-for rel_root in ('bin','libexec','skills','voxtype','systemd'):
+for rel_root in ('bin','libexec','skills','voxtype','systemd','plasma'):
     base=root/rel_root
     if not base.exists():
         continue
@@ -64,6 +64,7 @@ if [[ $mode == dry-run ]]; then
   printf 'dry-run: install %d user-local files under %s\n' "${#source_files[@]}" "$prefix"
   printf 'dry-run: create %d command links under %s\n' "${#link_sources[@]}" "$user_bin"
   printf 'dry-run: install skills into .agents, .claude, .codex, .pi, and .gemini\n'
+  printf 'dry-run: install Hermes Harness and Omarchy Agents Plasma packages\n'
   printf 'dry-run: install user systemd units and usage timer\n'
   exit 0
 fi
@@ -88,6 +89,12 @@ for source in "${link_sources[@]}"; do
 done
 
 KUBUNTU_SKILLS_ROOT="$prefix/skills" "$prefix/bin/omarchy-install-agent-skills"
+
+for package in hermes-harness omarchy-agents; do
+  package_id="com.asmoday.omarchy.$package"
+  kpackagetool6 --type Plasma/Applet --install "$prefix/plasma/$package/package" >/dev/null
+  printf 'package\t%s\n' "$package_id" >>"$manifest"
+done
 
 systemctl --user daemon-reload
 systemctl --user enable --now omarchy-agent-usage-update.timer 2>/dev/null || true

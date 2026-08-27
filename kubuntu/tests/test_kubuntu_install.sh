@@ -26,6 +26,7 @@ fail() {
 }
 
 export HOME="$test_home"
+export XDG_DATA_HOME="$test_home/.local/share"
 export SYSTEM_LOG="$log_file"
 export PATH="$fake_bin:/usr/bin:/bin"
 export KUBUNTU_INSTALL_PREFIX="$prefix"

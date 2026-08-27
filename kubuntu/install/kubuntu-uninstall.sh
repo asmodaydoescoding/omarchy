@@ -40,6 +40,9 @@ while IFS=$'\t' read -r kind path target; do
         rm -f -- "$path"
       fi
       ;;
+    package)
+      kpackagetool6 --type Plasma/Applet --remove "$path" >/dev/null 2>&1 || true
+      ;;
   esac
 done <"$manifest"
 rm -f -- "$manifest"
