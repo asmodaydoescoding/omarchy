@@ -18,6 +18,16 @@
 - The current source host is Ubuntu 26.04, KDE Plasma 6.6.6, Wayland, amd64. Git, gh, Python 3, jq, systemd, Konsole, KDE notifications, coredumpctl, and kpackagetool6 are installed. mise and standalone QML tooling are not installed.
 - The pinned Omarchy executable source is authoritative over rendered manual drift. In particular, the source supports `agy` and `ori` while some public documentation still says `gemini`.
 
+## Verified Vendor Sources and Current Gaps
+
+- mise: the official Linux installer documents the single-binary `mise.run` path at `https://mise.jdx.dev/installing-mise.html`.
+- Ollama: official Linux and GPU documentation is at `https://docs.ollama.com/linux` and `https://docs.ollama.com/gpu`; NVIDIA and AMD/ROCm handling must be tested against the actual host rather than inferred from Arch package names.
+- LM Studio: official system requirements state that Linux is distributed as an AppImage and Ubuntu 20.04 or newer is required; source `https://lmstudio.ai/docs/app/system-requirements`.
+- Voxtype: official installation documentation covers Debian/Ubuntu, AppImage, model setup, daemon setup, and GPU acceleration; source `https://voxtype.io/docs/`.
+- T3 Code: official installation documentation provides an `npx` path and Linux AppImage releases; source `https://github.com/pingdotgg/t3code/blob/main/docs/user/install.md`.
+- ChatGPT Desktop: official Linux preview documentation provides Ubuntu/Debian `.deb` packages for x64 and ARM64; source `https://learn.chatgpt.com/docs/linux/linux-app`.
+- Grok Bot: an authoritative Linux desktop package source was not confirmed during planning. The port must not install an unofficial Linux repack and must report this as a gap until a vendor-backed path is verified.
+
 ## Fidelity Contract
 
 1. Do not rewrite source behavior into a generic AI dashboard.
